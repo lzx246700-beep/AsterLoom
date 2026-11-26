@@ -1,0 +1,112 @@
+{
+  "contract_version": "R031_R08_BATCH_SOURCE_STAGE_V1",
+  "status": "PUBLIC_DEV_ONLY_STAGING_NO_SCI_APPROVAL",
+  "authorized_release_registry": {
+    "first_batch": "R06 frozen 16 author source SHA and exact manifest",
+    "first_registry_sha": "b261575500ca7d45c764077c72dbad83511c32b36b926754b5b468bd98e1d181",
+    "second_batch": "SCI R06 explicit publicly released three original JATS and native CC-BY per original publication",
+    "second_registry_sha": "d4254546b2b37b32fb608856f76ba07e4ac1ee76255f4558f8c4afc63459e0a4",
+    "self_asserted_Authorized_field_trusted": false,
+    "future_releases_require": "explicit distinct owner source release with auditable trusted independent SHA and original license proof; R08 does not enroll arbitrary external sources"
+  },
+  "entities": {
+    "BatchManifestV1": {
+      "required": [
+        "batch_contract",
+        "release_registry_SHA256",
+        "source_role",
+        "original_papers",
+        "science_Gold",
+        "new_unseen_sci"
+      ],
+      "source_pinned": true
+    },
+    "AuthorSourceAssetV1": {
+      "required": [
+        "paper_key",
+        "doi",
+        "asset_key",
+        "source_path",
+        "sha256",
+        "role",
+        "license",
+        "authorization_basis"
+      ],
+      "original_author_SHA_verified": true
+    },
+    "SourceSpanV1": {
+      "sql": "source_span",
+      "unique": "asset_id+original physical locator+span kind",
+      "original_literal_sha": true
+    },
+    "StageResultV1": {
+      "sql": "r08_stage_receipt",
+      "required": [
+        "batch_id",
+        "asset_id",
+        "original_sha",
+        "stage_kind",
+        "stage_code_sha",
+        "output_digest",
+        "status"
+      ]
+    },
+    "MetricBlockV1": {
+      "sql": "r08_science_evidence",
+      "requires": "exact author native metric cell, not inferred global section"
+    },
+    "NumericAtomV1": {
+      "sql": "numeric_atom",
+      "semantic_guard": "old 40 source-verified numeric atoms remain PROPOSED; new OCR source cells do not become ATP_RATE Y"
+    },
+    "ContrastProposalV1": {
+      "sql": "contrast_proposal",
+      "no_new_gold": true
+    },
+    "SourceClaimV1": {
+      "sql": "source_claim",
+      "original_JATS_paragraph_caption_SHA": true
+    },
+    "ScientificHoldV1": {
+      "sql": "scientific_hold",
+      "author_provenance": true
+    },
+    "ReviewQueueV1": {
+      "sql": "curation_queue",
+      "SCI_owner_approval": "NOT_APPROVED",
+      "user_training_approval": "NOT_APPROVED"
+    },
+    "PersistReceiptV1": {
+      "sql": "r08_batch+r08_stage_receipt",
+      "states": [
+        "SOURCE_STAGED",
+        "SOURCE_HOLD_PARTIAL",
+        "HARD_STOP"
+      ]
+    },
+    "RevisionRequestV1": {
+      "sql": "r08_source_revision_request",
+      "allowed_current_status": "SOURCE_HOLD",
+      "real_author_revision_applied": 0
+    }
+  },
+  "invariants": [
+    "multiple batches preserve paper count uniqueness by PMCID/DOI and independent asset IDs",
+    "same original author SHA and same batch id add zero science rows after replay",
+    "new run attempt may create new batch/receipt, but source rows are immutable and deduplicated",
+    "real source byte SHA / external registry role mismatch hard-stops without partial science approval",
+    "parse-level quarantine is SOURCE_HOLD_PARTIAL and requires explicit new attempt to retry",
+    "any schema/ACL/FK/global transaction failure forces batch rollback",
+    "AUTHOR_RELATIVE_ONLY, NUMERIC_ZERO, MISSING, NS and FIGURE_ONLY retain distinct states",
+    "original genetic and Seahorse OCR-linked ATP cannot turn into real XF ATP_RATE or ATP_CONTENT",
+    "source original numeric literals are not independent SCI scientific Gold",
+    "Work B/ResearchOS production forbidden, R07 source SQLite must remain frozen",
+    "new future source revisions require verified owner release, old SHA plus new SHA with supersedes, not silently overwrite"
+  ],
+  "locked_training_gate": {
+    "SCI_owner_review_approved": 0,
+    "user_training_permission": 0,
+    "qualified_y": 0,
+    "model_fit": false
+  }
+}

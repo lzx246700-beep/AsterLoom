@@ -1,0 +1,178 @@
+{
+  "base_fields": [
+    "provenance.author_sha256",
+    "provenance.original_locator",
+    "observation.author_numeric",
+    "observation.author_literal",
+    "observation.endpoint",
+    "dataset.study_group"
+  ],
+  "contract": "r031.dbcontract/1",
+  "extraction_capabilities": [
+    "native-JATS-table",
+    "author-Methods",
+    "official-SI-openpyxl",
+    "material-source-composition",
+    "reaction-chemistry-matcher-HOLD",
+    "material-batch-source-HOLD",
+    "covalent-bond-identity-verifier-HOLD"
+  ],
+  "id": "bioactive_polymer_v1",
+  "label": "BioactivePolymer v1",
+  "plugin_api": "r031_evidence.r23_profiles.ProfilePlugin/1",
+  "projection": {
+    "default": "NO_FIT_SOURCE_ONLY",
+    "format": [
+      "jsonl",
+      "csv"
+    ],
+    "grouped_split": [
+      "study",
+      "verified_parent_if_available",
+      "material_batch_if_author_reported"
+    ],
+    "separate_author_native_and_normalized": true
+  },
+  "qualification": {
+    "allow_derived_effect_without_author_same_assay_control": false,
+    "automatic_Gold": false,
+    "review": "INDEPENDENT_SCI_REQUIRED"
+  },
+  "qualification_rules": [
+    "physical_property_not_covalent_cell_response",
+    "physical_loaded_not_covalent",
+    "feed_not_measured_incorporation",
+    "material_batch_not_assumed",
+    "bio_n_not_well_n",
+    "OD450_not_percent_cell_viability"
+  ],
+  "retrieval_policy": {
+    "assay_first": [
+      "covalently conjugated bioactive polymer",
+      "natural monomer incorporated hydrogel",
+      "NMR quantitative incorporation",
+      "polymer macrophage ATP OCR with backbone control",
+      "GPC SEC polymerization"
+    ],
+    "source_context": [
+      "synthesis batch",
+      "NMR actual incorporation",
+      "reaction chemistry",
+      "covalent vs physical",
+      "cell model",
+      "matched material controls",
+      "official SI raw matrix"
+    ]
+  },
+  "schema": "r031.profile/1",
+  "source_priority": [
+    "author-JATS",
+    "official-SI-XLSX-CSV",
+    "licensed-PDF",
+    "author-Methods"
+  ],
+  "status": "DRAFT_SOURCE_ONLY",
+  "version": "1.0.0",
+  "views": [
+    {
+      "conditional": [
+        "material.feed_fraction",
+        "material.measured_incorporation",
+        "material.release_analyte"
+      ],
+      "endpoint_allow": [
+        "SWELLING_RATIO",
+        "MATERIAL_SWELLING_MASS",
+        "MATERIAL_ELASTIC_MODULUS",
+        "MATERIAL_TENSILE_STRENGTH",
+        "MATERIAL_STIFFNESS",
+        "MATERIAL_ELONGATION",
+        "MECHANICAL_STRENGTH",
+        "PARTICLE_SIZE",
+        "PORE_DIAMETER",
+        "RELEASE_RATE"
+      ],
+      "forbidden_endpoints": [
+        "CELL_CYTOTOXICITY_OD450",
+        "ATP_CONTENT",
+        "ATP_GENERATION_RATE"
+      ],
+      "id": "polymer_reaction_property_v1",
+      "required": [
+        "material.formulation_literal",
+        "material.reaction_anchor",
+        "material.batch_id",
+        "observation.native_unit",
+        "assay.method_locator"
+      ]
+    },
+    {
+      "conditional": [
+        "chemical.parent_structure",
+        "assay.independent_biological_n",
+        "material.release_analyte"
+      ],
+      "endpoint_allow": [
+        "ATP_CONTENT",
+        "ATP_GENERATION_RATE",
+        "ATP_LINKED_OCR",
+        "OXYGEN_CONSUMPTION",
+        "IL6_CONCENTRATION",
+        "IL6_RELATIVE_RELEASE",
+        "TNFA_CONCENTRATION",
+        "TNFA_RELATIVE_RELEASE",
+        "CELL_CYTOTOXICITY_OD450",
+        "CELL_ADHESION_OD450"
+      ],
+      "forbidden_endpoints": [
+        "SWELLING_RATIO",
+        "MATERIAL_SWELLING_MASS"
+      ],
+      "id": "covalent_polymer_cell_response_v1",
+      "required": [
+        "material.formulation_literal",
+        "material.reaction_anchor",
+        "material.batch_id",
+        "material.measured_incorporation",
+        "material.covalent_link_proof",
+        "biological.model_literal",
+        "conditions.dose_literal",
+        "conditions.exposure_time_literal",
+        "assay.method_locator",
+        "arm.control_linkage",
+        "observation.native_unit"
+      ]
+    },
+    {
+      "conditional": [
+        "material.feed_fraction",
+        "conditions.exposure_time_literal"
+      ],
+      "endpoint_allow": [
+        "POLYMER_MN",
+        "POLYMER_MW",
+        "POLYMER_PDI",
+        "MONOMER_CONVERSION",
+        "DEGREE_OF_SUBSTITUTION",
+        "INCORPORATION_EFFICIENCY"
+      ],
+      "forbidden_endpoints": [
+        "CELL_CYTOTOXICITY_OD450",
+        "ATP_CONTENT",
+        "ATP_GENERATION_RATE"
+      ],
+      "id": "polymerization_reaction_v1",
+      "required": [
+        "chemical.parent_structure",
+        "chemical.tested_form_literal",
+        "material.formulation_literal",
+        "material.reaction_anchor",
+        "material.covalent_link_proof",
+        "material.measured_incorporation",
+        "material.batch_id",
+        "observation.native_unit",
+        "assay.method_locator"
+      ]
+    }
+  ]
+}

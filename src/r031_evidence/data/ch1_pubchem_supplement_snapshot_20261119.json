@@ -1,0 +1,200 @@
+{
+  "fetched_count": 12,
+  "missing": [
+    "Leptochelin A"
+  ],
+  "records": [
+    {
+      "aliases": [
+        "Aflatoxin B1",
+        "AFB1"
+      ],
+      "cid": "186907",
+      "inchikey": "OQIQSTLJSLGHID-WNWIJWBNSA-N",
+      "iupac_name": "(3S,7R)-11-methoxy-6,8,19-trioxapentacyclo[10.7.0.02,9.03,7.013,17]nonadeca-1,4,9,11,13(17)-pentaene-16,18-dione",
+      "molecular_formula": "C17H12O6",
+      "preferred_name": "Aflatoxin B1",
+      "scaffold_group": "OQIQSTLJSLGHID",
+      "smiles": "COC1=C2C3=C(C(=O)CC3)C(=O)OC2=C4[C@@H]5C=CO[C@@H]5OC4=C1",
+      "source_query_response_sha256": "0318bcd558ee21a48908dd278200a691bce532e07fa016c6fba7f08cc900a937",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Aflatoxin%20B1/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Bisdemethoxycurcumin",
+        "BDMC"
+      ],
+      "cid": "5315472",
+      "inchikey": "PREBVFJICNPEKM-YDWXAUTNSA-N",
+      "iupac_name": "(1E,6E)-1,7-bis(4-hydroxyphenyl)hepta-1,6-diene-3,5-dione",
+      "molecular_formula": "C19H16O4",
+      "preferred_name": "Bisdemethoxycurcumin",
+      "scaffold_group": "PREBVFJICNPEKM",
+      "smiles": "C1=CC(=CC=C1/C=C/C(=O)CC(=O)/C=C/C2=CC=C(C=C2)O)O",
+      "source_query_response_sha256": "7da00bc3d3a80aad5c678fb1924b5378ea498fdea07123f1e0e0c72e09410d6c",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Bisdemethoxycurcumin/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Cyanidin-3-O-Glucoside",
+        "Cyanidin-3-O-glucoside",
+        "Cyanidin 3-glucoside",
+        "C3G"
+      ],
+      "cid": "441667",
+      "inchikey": "RKWHWFONKJEUEF-GQUPQBGVSA-O",
+      "iupac_name": "(2S,3R,4S,5S,6R)-2-[2-(3,4-dihydroxyphenyl)-5,7-dihydroxychromenylium-3-yl]oxy-6-(hydroxymethyl)oxane-3,4,5-triol",
+      "molecular_formula": "C21H21O11+",
+      "preferred_name": "Cyanidin-3-O-Glucoside",
+      "scaffold_group": "RKWHWFONKJEUEF",
+      "smiles": "C1=CC(=C(C=C1C2=[O+]C3=CC(=CC(=C3C=C2O[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)CO)O)O)O)O)O)O)O",
+      "source_query_response_sha256": "552fad843898b37cfd0ff4024821cc1b3ce64e5aa9543414526caa9e511988b0",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Cyanidin-3-O-Glucoside/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Ethyl p-methoxycinnamate",
+        "EPMC"
+      ],
+      "cid": "5281783",
+      "inchikey": "DHNGCHLFKUPGPX-RMKNXTFCSA-N",
+      "iupac_name": "ethyl (E)-3-(4-methoxyphenyl)prop-2-enoate",
+      "molecular_formula": "C12H14O3",
+      "preferred_name": "Ethyl p-methoxycinnamate",
+      "scaffold_group": "DHNGCHLFKUPGPX",
+      "smiles": "CCOC(=O)/C=C/C1=CC=C(C=C1)OC",
+      "source_query_response_sha256": "fb981cac368013f5f829548e5686222f3dfd9ffbdc9b8a2e4f467861181064fb",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Ethyl%20p-methoxycinnamate/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "L-Carnosine",
+        "Carnosine",
+        "carnosine"
+      ],
+      "cid": "439224",
+      "inchikey": "CQOVPNPJLQNMDC-ZETCQYMHSA-N",
+      "iupac_name": "(2S)-2-(3-aminopropanoylamino)-3-(1H-imidazol-5-yl)propanoic acid",
+      "molecular_formula": "C9H14N4O3",
+      "preferred_name": "L-Carnosine",
+      "scaffold_group": "CQOVPNPJLQNMDC",
+      "smiles": "C1=C(NC=N1)C[C@@H](C(=O)O)NC(=O)CCN",
+      "source_query_response_sha256": "41c7cf6b95d1108946e4157cc571f86534b86c30fb3def5f4fd4e48d70f7feeb",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/L-Carnosine/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Menaquinone-7",
+        "MK-7",
+        "Vitamin K2 (MK-7)"
+      ],
+      "cid": "5287554",
+      "inchikey": "RAKQPZMEYJZGPI-LJWNYQGCSA-N",
+      "iupac_name": "2-[(2E,6E,10E,14E,18E,22E)-3,7,11,15,19,23,27-heptamethyloctacosa-2,6,10,14,18,22,26-heptaenyl]-3-methylnaphthalene-1,4-dione",
+      "molecular_formula": "C46H64O2",
+      "preferred_name": "Menaquinone-7",
+      "scaffold_group": "RAKQPZMEYJZGPI",
+      "smiles": "CC1=C(C(=O)C2=CC=CC=C2C1=O)C/C=C(\\C)/CC/C=C(\\C)/CC/C=C(\\C)/CC/C=C(\\C)/CC/C=C(\\C)/CC/C=C(\\C)/CCC=C(C)C",
+      "source_query_response_sha256": "fdfffc256316ce2e0b061645f2f278a3b58441927bf94ef2426a33f0469d9056",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Menaquinone-7/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Putrescine",
+        "putrescine"
+      ],
+      "cid": "1045",
+      "inchikey": "KIDHWZJUCRJVML-UHFFFAOYSA-N",
+      "iupac_name": "butane-1,4-diamine",
+      "molecular_formula": "C4H12N2",
+      "preferred_name": "Putrescine",
+      "scaffold_group": "KIDHWZJUCRJVML",
+      "smiles": "C(CCN)CN",
+      "source_query_response_sha256": "83b5b55cf38786e0ef80a70a7366ae49dfff9d4a7943d501db6d95ac4a598a0a",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Putrescine/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Succinic Acid",
+        "Succinic acid",
+        "Succinate",
+        "succinate"
+      ],
+      "cid": "1110",
+      "inchikey": "KDYFGRWQOYBRFD-UHFFFAOYSA-N",
+      "iupac_name": "butanedioic acid",
+      "molecular_formula": "C4H6O4",
+      "preferred_name": "Succinic Acid",
+      "scaffold_group": "KDYFGRWQOYBRFD",
+      "smiles": "C(CC(=O)O)C(=O)O",
+      "source_query_response_sha256": "6abe9791469e3d9e3ad443d5b420150a4614d359e396c253f8a2aef60fee28eb",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Succinic%20Acid/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Zearalenone",
+        "ZEA",
+        "ZEN"
+      ],
+      "cid": "5281576",
+      "inchikey": "MBMQEIFVQACCCH-QBODLPLBSA-N",
+      "iupac_name": "(4S,12E)-16,18-dihydroxy-4-methyl-3-oxabicyclo[12.4.0]octadeca-1(14),12,15,17-tetraene-2,8-dione",
+      "molecular_formula": "C18H22O5",
+      "preferred_name": "Zearalenone",
+      "scaffold_group": "MBMQEIFVQACCCH",
+      "smiles": "C[C@H]1CCCC(=O)CCC/C=C/C2=C(C(=CC(=C2)O)O)C(=O)O1",
+      "source_query_response_sha256": "4654e9e79fdf92db1c48f907e2cca1bfe8f9e32dab9fb1d95d9831c9f13da6ba",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Zearalenone/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Creatine",
+        "creatine"
+      ],
+      "cid": "586",
+      "inchikey": "CVSVTCORWBXHQV-UHFFFAOYSA-N",
+      "iupac_name": "2-[carbamimidoyl(methyl)amino]acetic acid",
+      "molecular_formula": "C4H9N3O2",
+      "preferred_name": "Creatine",
+      "scaffold_group": "CVSVTCORWBXHQV",
+      "smiles": "CN(CC(=O)O)C(=N)N",
+      "source_query_response_sha256": "32e1ac47401988d797e3e0f5efc7fdaec712dca905c177cfc968bf321235f743",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Creatine/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "Guanidinoacetic Acid",
+        "guanidinoacetic acid",
+        "guanidinoacetic acid (GAA)",
+        "GAA"
+      ],
+      "cid": "763",
+      "inchikey": "BPMFZUMJYQTVII-UHFFFAOYSA-N",
+      "iupac_name": "2-(diaminomethylideneamino)acetic acid",
+      "molecular_formula": "C3H7N3O2",
+      "preferred_name": "Guanidinoacetic Acid",
+      "scaffold_group": "BPMFZUMJYQTVII",
+      "smiles": "C(C(=O)O)N=C(N)N",
+      "source_query_response_sha256": "06f2594baa9042ade108fdeee6782e063573c589c624d5ed7ac65258f4afe4a5",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/Guanidinoacetic%20Acid/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    },
+    {
+      "aliases": [
+        "L-Fucose",
+        "L-fucose",
+        "fucose"
+      ],
+      "cid": "17106",
+      "inchikey": "SHZGCJCMOBCMKK-DHVFOXMCSA-N",
+      "iupac_name": "(3S,4R,5S,6S)-6-methyloxane-2,3,4,5-tetrol",
+      "molecular_formula": "C6H12O5",
+      "preferred_name": "L-Fucose",
+      "scaffold_group": "SHZGCJCMOBCMKK",
+      "smiles": "C[C@H]1[C@H]([C@H]([C@@H](C(O1)O)O)O)O",
+      "source_query_response_sha256": "a8a124e89c81e268e7a7b5e2ad920616d12654a6bb428bd7f2b93d894887ec95",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/L-Fucose/property/IsomericSMILES,ConnectivitySMILES,InChIKey,MolecularFormula,IUPACName/JSON"
+    }
+  ],
+  "retrieved_at_utc": "2026-11-19T07:12:30.479969+00:00",
+  "schema": "asterloom.ch1-pubchem-supplement-snapshot/1"
+}

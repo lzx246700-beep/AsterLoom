@@ -1,0 +1,183 @@
+{
+  "schema_id": "BIO-R031-R07-SourceEvidenceContractV1",
+  "schema_version": "1.0.0",
+  "purpose": "source-only author evidence staging aligned to Work A/B existing scientific core; never a training Gold table",
+  "source_selection": "R06_SHA_PINNED_16_AUTHORIZED_AUTHOR_SOURCE_ASSETS",
+  "endpoint_registry": {
+    "ATP_CONTENT": {
+      "native_dimension": "amount_per_cell_or_protein",
+      "not_equivalent_to": [
+        "ATP_PRODUCTION_RATE",
+        "ATP_LINKED_OCR_AUX",
+        "ECAR_AUX",
+        "PHENOTYPE_Z_SCORE_AUX"
+      ]
+    },
+    "ATP_PRODUCTION_RATE": {
+      "native_dimension": "amount_per_time",
+      "requires": "author XF ATP Rate native treated/control rate source; not proven in current sources"
+    },
+    "ATP_LINKED_OCR_AUX": {
+      "native_dimension": "oxygen_consumption_rate",
+      "never_promote_to": "ATP_PRODUCTION_RATE"
+    },
+    "ECAR_AUX": {
+      "native_dimension": "acidification_rate",
+      "never_promote_to": "ATP_PRODUCTION_RATE"
+    },
+    "PHENOTYPE_Z_SCORE_AUX": {
+      "native_dimension": "standardized phenotypic score",
+      "never_promote_to": "ATP_CONTENT"
+    }
+  },
+  "entities": {
+    "SourceBundleV1": {
+      "table": "ingest_run",
+      "required": [
+        "manifest_sha",
+        "source_receipt_sha",
+        "code_sha",
+        "source_count",
+        "status"
+      ],
+      "natural_key": "source manifest SHA + R06 frozen run SHA"
+    },
+    "SourceAssetV1": {
+      "table": "asset_ref",
+      "required": [
+        "paper_id",
+        "original_sha",
+        "original_path",
+        "license_literal",
+        "role",
+        "source_revision"
+      ],
+      "nullable": [
+        "supersedes_asset_id"
+      ],
+      "natural_key": "paper key + author asset key + revision"
+    },
+    "SourceSpanV1": {
+      "table": "source_span",
+      "required": [
+        "asset_id",
+        "original_sha",
+        "locator",
+        "span_kind",
+        "original_value_state"
+      ],
+      "nullable": [
+        "source_literal"
+      ],
+      "natural_key": "asset ID + original physical JATS or SI cell address + source kind"
+    },
+    "AssayInstanceV1": {
+      "table": "assay_instance",
+      "required": [
+        "asset_id",
+        "native_metric_literal",
+        "endpoint",
+        "parent_metric_locator",
+        "unit_state",
+        "cell_model_state"
+      ],
+      "nullable": [
+        "cell_model",
+        "biological_n",
+        "source_unit"
+      ],
+      "scientific_status": "SOURCE_HOLD"
+    },
+    "MetricBlockV1": {
+      "table": "assay_instance",
+      "required": [
+        "metric_block_id",
+        "native_metric_literal",
+        "parent_metric_locator"
+      ],
+      "note": "distinct metric from whole-article assay mentions"
+    },
+    "MeasurementProposalV1": {
+      "table": "numeric_atom",
+      "required": [
+        "assay_id",
+        "source_span_id",
+        "value_state",
+        "statistic_type"
+      ],
+      "nullable": [
+        "author_value",
+        "uncertainty",
+        "range_min",
+        "range_max"
+      ],
+      "promotion": "never by tests alone"
+    },
+    "ContrastProposalV1": {
+      "table": "contrast_proposal",
+      "required": [
+        "treated_atom_id",
+        "control_atom_id",
+        "assay_id",
+        "endpoint",
+        "source_pair_state"
+      ],
+      "hard_constraints": {
+        "qualified_y": null,
+        "training_ready": 0,
+        "sci_review_state": "SCI_REVIEW_PENDING"
+      }
+    },
+    "ScienceHoldV1": {
+      "table": "scientific_hold",
+      "required": [
+        "scientific_reason",
+        "asset_id",
+        "review_state"
+      ],
+      "nullable": [
+        "source_span_id",
+        "source_claim_id"
+      ],
+      "never_mean": "no biological effect"
+    },
+    "ExtractionRunV1": {
+      "table": "ingest_run",
+      "required": [
+        "manifest_sha",
+        "source_receipt_sha",
+        "code_sha"
+      ],
+      "reason": "append-only source stage receipt, unique run namespace"
+    },
+    "ReviewDecisionV1": {
+      "table": "review_event",
+      "status": "fixture-only for R07",
+      "scopes": [
+        "SOURCE_VERIFICATION",
+        "SCIENCE_QUALIFICATION",
+        "NATURAL_IDENTITY",
+        "USER_TRAINING_APPROVAL"
+      ],
+      "production_SCI_review": "NOT_AUTHORIZED",
+      "training_authorization": "NOT_AUTHORIZED"
+    }
+  },
+  "invariants": [
+    "original author byte source_sha required before staging",
+    "0 != missing != NS != figure-only != relative-only",
+    "source-native median+range is not automatically mean+SD or CI",
+    "same-DOI or same-PMCID across Work B must be collision checked, never autospliced",
+    "source-verified numeric atom is PROPOSED, not training-qualified Y",
+    "metric evidence link needs same asset and exact original physical metric header locator",
+    "chemical parent and tested chemical form unverified must stay NULL",
+    "default SCI approval and user training approval cannot be populated by Chat or test"
+  ],
+  "core_mapping_table": "reports/phase1b_r07/R07_CORE_BRIDGE_HOLD_MAP.csv",
+  "schema_migrations": [
+    "schemas/R07_evidence_staging_v701.sql",
+    "schemas/R07_append_only_extension_70101.sql"
+  ],
+  "research_status": "SOURCE_HOLD",
+  "qualified_training_records": 0
+}

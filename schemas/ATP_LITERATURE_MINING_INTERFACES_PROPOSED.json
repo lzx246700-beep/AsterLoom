@@ -1,0 +1,729 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/atp-literature-mining/v0.1/proposed",
+  "title": "BIO-R031 ATP Literature Mining interfaces - engineering proposal only",
+  "description": "Read-only provenance transport. No inference of scientific Gold or training Y.",
+  "$comment": "PROPOSED_NOT_PRODUCTION, SCI_R18_NOT_DUPLICATED, FIT_NO_GO",
+  "$defs": {
+    "PaperRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "ATP-LM/0.1-PROPOSED"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_doi_or_pmcid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_asset_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "license_or_access_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "science_review_gate": {
+          "enum": [
+            "ENGINEERING_UNREVIEWED",
+            "SOURCE_HOLD",
+            "G0_KEYWORD_ONLY",
+            "G1_ASSAY_VERIFIED_NO_Y",
+            "G2_AUTHOR_EXACT_Y_WITH_HOLDS",
+            "G3_TASK_ELIGIBILITY_PROPOSED_PENDING_MASTER"
+          ]
+        },
+        "gold_approved": {
+          "const": false
+        },
+        "pmcid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "journal": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "publication_year": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "source_asset_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_id",
+        "source_doi_or_pmcid",
+        "original_asset_sha256",
+        "license_or_access_status",
+        "extraction_method",
+        "extraction_version",
+        "science_review_gate",
+        "gold_approved",
+        "source_asset_ids"
+      ]
+    },
+    "SourceAsset": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "ATP-LM/0.1-PROPOSED"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_doi_or_pmcid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_asset_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "license_or_access_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "science_review_gate": {
+          "enum": [
+            "ENGINEERING_UNREVIEWED",
+            "SOURCE_HOLD",
+            "G0_KEYWORD_ONLY",
+            "G1_ASSAY_VERIFIED_NO_Y",
+            "G2_AUTHOR_EXACT_Y_WITH_HOLDS",
+            "G3_TASK_ELIGIBILITY_PROPOSED_PENDING_MASTER"
+          ]
+        },
+        "gold_approved": {
+          "const": false
+        },
+        "paper_record_id": {
+          "type": "string"
+        },
+        "source_uri": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_path": {
+          "type": "string"
+        },
+        "media_type": {
+          "type": "string"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "retrieval_context": {
+          "type": "string"
+        },
+        "is_original_author_asset": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_id",
+        "source_doi_or_pmcid",
+        "original_asset_sha256",
+        "license_or_access_status",
+        "extraction_method",
+        "extraction_version",
+        "science_review_gate",
+        "gold_approved",
+        "paper_record_id",
+        "source_path",
+        "media_type",
+        "bytes"
+      ]
+    },
+    "AssayRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "ATP-LM/0.1-PROPOSED"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_doi_or_pmcid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_asset_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "license_or_access_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "science_review_gate": {
+          "enum": [
+            "ENGINEERING_UNREVIEWED",
+            "SOURCE_HOLD",
+            "G0_KEYWORD_ONLY",
+            "G1_ASSAY_VERIFIED_NO_Y",
+            "G2_AUTHOR_EXACT_Y_WITH_HOLDS",
+            "G3_TASK_ELIGIBILITY_PROPOSED_PENDING_MASTER"
+          ]
+        },
+        "gold_approved": {
+          "const": false
+        },
+        "paper_record_id": {
+          "type": "string"
+        },
+        "source_asset_id": {
+          "type": "string"
+        },
+        "endpoint_task": {
+          "enum": [
+            "ATP_CONTENT",
+            "ATP_PRODUCTION_RATE",
+            "NOT_ATP_TASK",
+            "UNKNOWN_HOLD"
+          ]
+        },
+        "endpoint_subtype": {
+          "enum": [
+            "CONTENT_CELLULAR",
+            "RATE_MITO",
+            "RATE_GLYCO",
+            "RATE_TOTAL",
+            "ATP_LINKED_OCR_AUX",
+            "OTHER_OR_HOLD"
+          ]
+        },
+        "assay_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "normalization_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "viability_or_cell_count_context": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cell_model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cell_state_and_challenge": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "author_anchor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_id",
+        "source_doi_or_pmcid",
+        "original_asset_sha256",
+        "license_or_access_status",
+        "extraction_method",
+        "extraction_version",
+        "science_review_gate",
+        "gold_approved",
+        "paper_record_id",
+        "source_asset_id",
+        "endpoint_task",
+        "endpoint_subtype"
+      ]
+    },
+    "ScreenCohort": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "ATP-LM/0.1-PROPOSED"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_doi_or_pmcid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_asset_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "license_or_access_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "science_review_gate": {
+          "enum": [
+            "ENGINEERING_UNREVIEWED",
+            "SOURCE_HOLD",
+            "G0_KEYWORD_ONLY",
+            "G1_ASSAY_VERIFIED_NO_Y",
+            "G2_AUTHOR_EXACT_Y_WITH_HOLDS",
+            "G3_TASK_ELIGIBILITY_PROPOSED_PENDING_MASTER"
+          ]
+        },
+        "gold_approved": {
+          "const": false
+        },
+        "assay_record_id": {
+          "type": "string"
+        },
+        "n_experimentally_tested": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "n_public_entity_ids": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "n_public_matched_numeric_y": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "n_independent_bio_run": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "selection_mechanism": {
+          "enum": [
+            "ENTIRE_COHORT",
+            "SELECTED_HITS",
+            "UNKNOWN"
+          ]
+        },
+        "missingness_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_id",
+        "source_doi_or_pmcid",
+        "original_asset_sha256",
+        "license_or_access_status",
+        "extraction_method",
+        "extraction_version",
+        "science_review_gate",
+        "gold_approved",
+        "assay_record_id",
+        "selection_mechanism"
+      ]
+    },
+    "ATPObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "ATP-LM/0.1-PROPOSED"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_doi_or_pmcid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_asset_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "license_or_access_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "science_review_gate": {
+          "enum": [
+            "ENGINEERING_UNREVIEWED",
+            "SOURCE_HOLD",
+            "G0_KEYWORD_ONLY",
+            "G1_ASSAY_VERIFIED_NO_Y",
+            "G2_AUTHOR_EXACT_Y_WITH_HOLDS",
+            "G3_TASK_ELIGIBILITY_PROPOSED_PENDING_MASTER"
+          ]
+        },
+        "gold_approved": {
+          "const": false
+        },
+        "assay_record_id": {
+          "type": "string"
+        },
+        "screen_cohort_id": {
+          "type": "string"
+        },
+        "tested_form": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reference_parent_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "species": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cell_model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cell_state_and_challenge": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dose_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "dose_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exposure_duration": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "duration_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "endpoint_subtype": {
+          "enum": [
+            "CONTENT_CELLULAR",
+            "RATE_MITO",
+            "RATE_GLYCO",
+            "RATE_TOTAL"
+          ]
+        },
+        "normalization_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "matched_control_definition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "treated_native_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "control_native_value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "author_exact_relative_effect": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "native_effect_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "biological_n": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "technical_n": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "uncertainty_and_p_value": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "author_anchor": {
+          "type": "string"
+        },
+        "study_group_id": {
+          "type": "string"
+        },
+        "parent_split_group_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "candidate_log2_ratio": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "source_reviewed_by_independent_role": {
+          "const": false
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_id",
+        "source_doi_or_pmcid",
+        "original_asset_sha256",
+        "license_or_access_status",
+        "extraction_method",
+        "extraction_version",
+        "science_review_gate",
+        "gold_approved",
+        "assay_record_id",
+        "screen_cohort_id",
+        "endpoint_subtype",
+        "author_anchor",
+        "study_group_id"
+      ]
+    },
+    "QAReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "ATP-LM/0.1-PROPOSED"
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_doi_or_pmcid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_asset_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "license_or_access_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "science_review_gate": {
+          "enum": [
+            "ENGINEERING_UNREVIEWED",
+            "SOURCE_HOLD",
+            "G0_KEYWORD_ONLY",
+            "G1_ASSAY_VERIFIED_NO_Y",
+            "G2_AUTHOR_EXACT_Y_WITH_HOLDS",
+            "G3_TASK_ELIGIBILITY_PROPOSED_PENDING_MASTER"
+          ]
+        },
+        "gold_approved": {
+          "const": false
+        },
+        "target_record_id": {
+          "type": "string"
+        },
+        "reviewer_type": {
+          "enum": [
+            "ENGINEERING",
+            "SCI_INDEPENDENT",
+            "MASTER_PENDING"
+          ]
+        },
+        "review_status": {
+          "enum": [
+            "PASS_TECHNICAL_ONLY",
+            "SOURCE_HOLD",
+            "PENDING",
+            "REJECTED_SCIENCE"
+          ]
+        },
+        "hold_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewed_source_anchor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewed_at_utc": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "record_id",
+        "source_doi_or_pmcid",
+        "original_asset_sha256",
+        "license_or_access_status",
+        "extraction_method",
+        "extraction_version",
+        "science_review_gate",
+        "gold_approved",
+        "target_record_id",
+        "review_status"
+      ]
+    }
+  },
+  "x-links": [
+    "PaperRecord -> SourceAsset.paper_record_id",
+    "SourceAsset -> AssayRecord.source_asset_id",
+    "AssayRecord -> ScreenCohort.assay_record_id",
+    "ScreenCohort -> ATPObservation.screen_cohort_id",
+    "ATPObservation -> QAReview.target_record_id"
+  ],
+  "x-invariants": [
+    "MISSING_NULL_NOT_ZERO",
+    "ATP_CONTENT_NEVER_COERCED_TO_RATE",
+    "ATP_LINKED_OCR_AUX_NOT_ATP_RATE",
+    "CELLTITER_GLO_WHOLE_WELL_NEEDS_VIABILITY_CHECK",
+    "REVIEW_NOT_AUTO_GOLD",
+    "NO_AUTHOR_NUMERICS_FROM_FIGURE_APPROXIMATION",
+    "PARENT_STUDY_BIO_RUN_GROUPING"
+  ]
+}

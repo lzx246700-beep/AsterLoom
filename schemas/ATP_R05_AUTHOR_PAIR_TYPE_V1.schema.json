@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:r031:R05:typed-author-pair-v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_sha256",
+    "assay_instance_id",
+    "metric_block_id",
+    "matched_contrast_id",
+    "source_unit_literal",
+    "unit_dimension",
+    "endpoint_task",
+    "endpoint_subtype",
+    "numeric_statistic_type",
+    "treated",
+    "control",
+    "time_context",
+    "treatment_exposure_duration",
+    "status",
+    "gold_approved",
+    "independent_SCI_verified"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ATP_R05_SCOPED_AUTHOR_GRAPH_V1"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "assay_instance_id": {
+      "type": "string",
+      "pattern": "^r05:assay:"
+    },
+    "metric_block_id": {
+      "type": "string",
+      "pattern": "^r05:metric:"
+    },
+    "matched_contrast_id": {
+      "type": "string",
+      "pattern": "^r05:pair:"
+    },
+    "source_unit_literal": {
+      "type": "string",
+      "minLength": 2
+    },
+    "unit_dimension": {
+      "enum": [
+        "AMOUNT_NORMALIZED_PER_CELLS_OR_PROTEIN",
+        "AMOUNT_PER_TIME"
+      ]
+    },
+    "endpoint_task": {
+      "enum": [
+        "ATP_CONTENT",
+        "ATP_PRODUCTION_RATE"
+      ]
+    },
+    "endpoint_subtype": {
+      "enum": [
+        "ATP_CONTENT",
+        "RATE_TOTAL",
+        "RATE_MITO",
+        "RATE_GLYCO"
+      ]
+    },
+    "numeric_statistic_type": {
+      "enum": [
+        "MEAN_WITH_UNCERTAINTY",
+        "MEDIAN_WITH_RANGE"
+      ]
+    },
+    "treated": {
+      "type": "object",
+      "required": [
+        "statistic",
+        "value",
+        "literal",
+        "cell_anchor",
+        "row",
+        "col"
+      ],
+      "properties": {
+        "statistic": {
+          "enum": [
+            "MEAN_WITH_UNCERTAINTY",
+            "MEDIAN_WITH_RANGE"
+          ]
+        },
+        "value": {
+          "type": "number"
+        },
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell_anchor": {
+          "type": "string",
+          "minLength": 3
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "col": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "range_min": {
+          "type": "number"
+        },
+        "range_max": {
+          "type": "number"
+        },
+        "uncertainty": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "uncertainty_kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "control": {
+      "type": "object",
+      "required": [
+        "statistic",
+        "value",
+        "literal",
+        "cell_anchor",
+        "row",
+        "col"
+      ],
+      "properties": {
+        "statistic": {
+          "enum": [
+            "MEAN_WITH_UNCERTAINTY",
+            "MEDIAN_WITH_RANGE"
+          ]
+        },
+        "value": {
+          "type": "number"
+        },
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell_anchor": {
+          "type": "string",
+          "minLength": 3
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "col": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "range_min": {
+          "type": "number"
+        },
+        "range_max": {
+          "type": "number"
+        },
+        "uncertainty": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "uncertainty_kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "time_context": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "treatment_exposure_duration": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "status": {
+      "const": "SOURCE_HOLD"
+    },
+    "gold_approved": {
+      "const": false
+    },
+    "independent_SCI_verified": {
+      "const": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "endpoint_task": {
+            "const": "ATP_CONTENT"
+          }
+        },
+        "required": [
+          "endpoint_task"
+        ]
+      },
+      "then": {
+        "properties": {
+          "endpoint_subtype": {
+            "const": "ATP_CONTENT"
+          },
+          "unit_dimension": {
+            "const": "AMOUNT_NORMALIZED_PER_CELLS_OR_PROTEIN"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "endpoint_task": {
+            "const": "ATP_PRODUCTION_RATE"
+          }
+        },
+        "required": [
+          "endpoint_task"
+        ]
+      },
+      "then": {
+        "properties": {
+          "endpoint_subtype": {
+            "enum": [
+              "RATE_TOTAL",
+              "RATE_MITO",
+              "RATE_GLYCO"
+            ]
+          },
+          "unit_dimension": {
+            "const": "AMOUNT_PER_TIME"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "numeric_statistic_type": {
+            "const": "MEDIAN_WITH_RANGE"
+          }
+        },
+        "required": [
+          "numeric_statistic_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "treated": {
+            "required": [
+              "range_min",
+              "range_max"
+            ],
+            "properties": {
+              "statistic": {
+                "const": "MEDIAN_WITH_RANGE"
+              }
+            }
+          },
+          "control": {
+            "required": [
+              "range_min",
+              "range_max"
+            ],
+            "properties": {
+              "statistic": {
+                "const": "MEDIAN_WITH_RANGE"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "numeric_statistic_type": {
+            "const": "MEAN_WITH_UNCERTAINTY"
+          }
+        },
+        "required": [
+          "numeric_statistic_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "treated": {
+            "properties": {
+              "statistic": {
+                "const": "MEAN_WITH_UNCERTAINTY"
+              }
+            }
+          },
+          "control": {
+            "properties": {
+              "statistic": {
+                "const": "MEAN_WITH_UNCERTAINTY"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "time_context": {
+            "type": "object",
+            "required": [
+              "time_context_kind"
+            ],
+            "properties": {
+              "time_context_kind": {
+                "const": "STORAGE_TIME"
+              }
+            }
+          }
+        },
+        "required": [
+          "time_context"
+        ]
+      },
+      "then": {
+        "properties": {
+          "treatment_exposure_duration": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

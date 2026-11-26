@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68,<85"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "r031-source-adapters"
+version = "0.1.1"
+description = "AsterLoom isolated JATS and supplemental author-source adapters"
+requires-python = ">=3.12"
+dependencies = ["requests>=2.32.2", "lxml>=6", "openpyxl>=3.1.5"]
+
+[project.optional-dependencies]
+pdf = [
+  "docling-slim[convert-core,format-pdf-pypdfium2,format-xml-jats,models-local]==2.143.0",
+  "docling-ibm-models[opencv-python-headless]==4.0.4",
+  "pypdfium2==5.14.0"
+]
+
+[project.scripts]
+r15-adapter = "r15_adapters.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["r15_adapters*"]
+exclude = ["tests*"]

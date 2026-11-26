@@ -1,0 +1,14 @@
+{
+  "id": "small_molecule_ros",
+  "entity": "tested_small_molecule",
+  "conditions": "all_cell_and_tissue_models_keep_own_units",
+  "queries": ["intracellular reactive oxygen species", "ROS production"],
+  "endpoints": {
+    "ROS_SIGNAL": "(?:intracellular |cellular |mitochondrial )?(?:ROS|reactive oxygen species)(?: (?:levels?|content|production|generation|accumulation|fluorescence))?|(?:levels?|production|accumulation) of (?:intracellular )?(?:ROS|reactive oxygen species)"
+  },
+  "exclude": "cell.free|DPPH|ABTS|chemical radical scavenging",
+  "absolute_unit": "(?:nmol|pmol)\\s*/\\s*(?:mg(?:\\s+protein)?|cells?)",
+  "methods": "DCFH|DCFDA|MitoSOX|dichlorofluoresc|fluorescence assay",
+  "strategies": ["result_clause", "native_rectangular_table"],
+  "levels": ["L1", "L2", "L3"], "training": "exploratory_candidates_only", "strict_review_task": null
+}

@@ -1,0 +1,779 @@
+{
+  "schema": "synthetic_source_context_minimal_reproduction",
+  "synthetic": true,
+  "created_denver": "2026-11-06 22:38:23 MST",
+  "intended_use": "Same existing code task/PR only. Diagnostic fixture, not a product implementation or extraction result.",
+  "fiction_notice": "All sentences, compounds, model labels and experiment descriptions were newly composed. No paper, real molecule/model name, original stimulus identity, source quote, identifier, scientific measurement or database row is included. ATP and endpoint terms are generic ontology vocabulary.",
+  "issue_scope": {
+    "confirmed": "The inspected result evidence fragment contains a contextual term; the current structured source_context is null. Generic alias/action/total-endpoint order and a coordinated model construction were checked without exporting source text.",
+    "not_yet_established": "Exact modifier attachment to each coordinated real model arm was NOT fully verified before the Mac became unreachable. Therefore NULL has not been conclusively adjudicated as a product error for every arm. Do not force-fill it based only on the previous posthoc stress-context label.",
+    "distinctions": [
+      "Local source_context is distinct from a causal stimulus_agent; an explicitly anchored context can be supported while the agent remains unknown.",
+      "TOTAL/component endpoint scope and context/model-arm scope are separate constraints; satisfying one does not establish the other."
+    ],
+    "earlier_grammar_probe_correction": "A naive punctuation split incorrectly counted decimal points as sentence boundaries. That count is invalid and supplies no evidence of cross-sentence context. No claim about actual sentence count is made.",
+    "coverage_limit": "These are hypothetical minimal acceptance cases, not proof of coverage of the real source and not a blind/frozen scientific gold set. No source-code root-cause analysis was performed."
+  },
+  "anchor_contract": {
+    "offset_unit": "Zero-based Unicode character offsets; end exclusive within each exact synthetic text.",
+    "required": "Every supported field must carry a local span and an unambiguous link to its molecule/model/result arm. A span occurring elsewhere in a paragraph is insufficient.",
+    "context": "Allow adjective modifiers inside a model noun phrase; do not require under/during/conditions keywords. Preserve only the explicitly evidenced contextual meaning.",
+    "unknown": "Null value, unknown status and no anchors whenever absent or ambiguous. No paragraph-level, cross-sentence, cross-arm or causal-agent completion without an explicit binding chain.",
+    "coordination": "Model modifiers are arm-local by default. Share only when the full grammatical scope is explicitly established; otherwise retain unknown for the ambiguous arm.",
+    "migration": "No SQL backfill, existing expectation modification, product execution, CLI rerun or installation change is requested by this fixture."
+  },
+  "cases": [
+    {
+      "id": "positive_local_modifier_and_coordination_boundary",
+      "synthetic": true,
+      "text": "Vellun increased total ATP production in dim-lit Luma cultures and Mera cultures.",
+      "expected_arms": [
+        {
+          "arm_id": "luma",
+          "fields": {
+            "dose": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No dose is stated."
+            },
+            "exposure": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No exposure duration is stated."
+            },
+            "value": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "Only a qualitative direction is stated."
+            },
+            "unit": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No numerical result or unit is stated."
+            },
+            "comparator": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No comparator is explicitly identified."
+            },
+            "stimulus_agent": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "A contextual condition does not identify a causal stimulus agent."
+            },
+            "molecule": {
+              "status": "supported",
+              "value": "Vellun",
+              "anchors": [
+                {
+                  "start": 0,
+                  "end": 6,
+                  "text": "Vellun"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "cell_or_model": {
+              "status": "supported",
+              "value": "Luma cultures",
+              "anchors": [
+                {
+                  "start": 49,
+                  "end": 62,
+                  "text": "Luma cultures"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint": {
+              "status": "supported",
+              "value": "total ATP production",
+              "anchors": [
+                {
+                  "start": 17,
+                  "end": 37,
+                  "text": "total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint_scope": {
+              "status": "supported",
+              "value": "TOTAL",
+              "anchors": [
+                {
+                  "start": 17,
+                  "end": 37,
+                  "text": "total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "direction": {
+              "status": "supported",
+              "value": "increase",
+              "anchors": [
+                {
+                  "start": 7,
+                  "end": 16,
+                  "text": "increased"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "source_context": {
+              "status": "supported",
+              "value": "dim-lit",
+              "anchors": [
+                {
+                  "start": 41,
+                  "end": 48,
+                  "text": "dim-lit"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            }
+          },
+          "binding_anchor": {
+            "start": 49,
+            "end": 62,
+            "text": "Luma cultures"
+          },
+          "molecule_specific_emission_allowed": true
+        },
+        {
+          "arm_id": "mera",
+          "fields": {
+            "dose": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No dose is stated."
+            },
+            "exposure": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No exposure duration is stated."
+            },
+            "value": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "Only a qualitative direction is stated."
+            },
+            "unit": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No numerical result or unit is stated."
+            },
+            "comparator": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No comparator is explicitly identified."
+            },
+            "stimulus_agent": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "A contextual condition does not identify a causal stimulus agent."
+            },
+            "molecule": {
+              "status": "supported",
+              "value": "Vellun",
+              "anchors": [
+                {
+                  "start": 0,
+                  "end": 6,
+                  "text": "Vellun"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "cell_or_model": {
+              "status": "supported",
+              "value": "Mera cultures",
+              "anchors": [
+                {
+                  "start": 67,
+                  "end": 80,
+                  "text": "Mera cultures"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint": {
+              "status": "supported",
+              "value": "total ATP production",
+              "anchors": [
+                {
+                  "start": 17,
+                  "end": 37,
+                  "text": "total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint_scope": {
+              "status": "supported",
+              "value": "TOTAL",
+              "anchors": [
+                {
+                  "start": 17,
+                  "end": 37,
+                  "text": "total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "direction": {
+              "status": "supported",
+              "value": "increase",
+              "anchors": [
+                {
+                  "start": 7,
+                  "end": 16,
+                  "text": "increased"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "source_context": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No explicit, unambiguous contextual modifier is anchored to this model arm."
+            }
+          },
+          "binding_anchor": {
+            "start": 67,
+            "end": 80,
+            "text": "Mera cultures"
+          },
+          "molecule_specific_emission_allowed": true
+        }
+      ],
+      "negative_assertions": [
+        "The first model has a directly attached adjective context even without an under/during/conditions template.",
+        "Conservatively leave the second arm context unknown: do not propagate a modifier across coordinated model heads without an explicit scope rule or independently supported shared head.",
+        "Do not invent a chemical stressor, dose, time, quantitative value, unit, or comparator."
+      ]
+    },
+    {
+      "id": "negative_unrelated_cross_sentence_background",
+      "synthetic": true,
+      "text": "Dim-lit Luma cultures were discussed as background. Vellun increased total ATP production in Mera cultures.",
+      "expected_arms": [
+        {
+          "arm_id": "mera",
+          "fields": {
+            "dose": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No dose is stated."
+            },
+            "exposure": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No exposure duration is stated."
+            },
+            "value": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "Only a qualitative direction is stated."
+            },
+            "unit": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No numerical result or unit is stated."
+            },
+            "comparator": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No comparator is explicitly identified."
+            },
+            "stimulus_agent": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "A contextual condition does not identify a causal stimulus agent."
+            },
+            "molecule": {
+              "status": "supported",
+              "value": "Vellun",
+              "anchors": [
+                {
+                  "start": 52,
+                  "end": 58,
+                  "text": "Vellun"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "cell_or_model": {
+              "status": "supported",
+              "value": "Mera cultures",
+              "anchors": [
+                {
+                  "start": 93,
+                  "end": 106,
+                  "text": "Mera cultures"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint": {
+              "status": "supported",
+              "value": "total ATP production",
+              "anchors": [
+                {
+                  "start": 69,
+                  "end": 89,
+                  "text": "total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint_scope": {
+              "status": "supported",
+              "value": "TOTAL",
+              "anchors": [
+                {
+                  "start": 69,
+                  "end": 89,
+                  "text": "total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "direction": {
+              "status": "supported",
+              "value": "increase",
+              "anchors": [
+                {
+                  "start": 59,
+                  "end": 68,
+                  "text": "increased"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "source_context": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No explicit, unambiguous contextual modifier is anchored to this model arm."
+            }
+          },
+          "binding_anchor": {
+            "start": 93,
+            "end": 106,
+            "text": "Mera cultures"
+          },
+          "molecule_specific_emission_allowed": true
+        }
+      ],
+      "negative_assertions": [
+        "The background sentence describes a different model and supplies no reference connecting its condition to the result arm.",
+        "The result source_context must remain unknown; document-level context alone is insufficient."
+      ]
+    },
+    {
+      "id": "negative_unknown_agent_despite_explicit_context",
+      "synthetic": true,
+      "text": "Total ATP production increased in dim-lit Luma cultures.",
+      "expected_arms": [
+        {
+          "arm_id": "luma",
+          "fields": {
+            "dose": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No dose is stated."
+            },
+            "exposure": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No exposure duration is stated."
+            },
+            "value": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "Only a qualitative direction is stated."
+            },
+            "unit": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No numerical result or unit is stated."
+            },
+            "comparator": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No comparator is explicitly identified."
+            },
+            "stimulus_agent": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "A contextual condition does not identify a causal stimulus agent."
+            },
+            "molecule": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No treatment molecule is named; do not manufacture a molecule-specific relation."
+            },
+            "cell_or_model": {
+              "status": "supported",
+              "value": "Luma cultures",
+              "anchors": [
+                {
+                  "start": 42,
+                  "end": 55,
+                  "text": "Luma cultures"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint": {
+              "status": "supported",
+              "value": "Total ATP production",
+              "anchors": [
+                {
+                  "start": 0,
+                  "end": 20,
+                  "text": "Total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint_scope": {
+              "status": "supported",
+              "value": "TOTAL",
+              "anchors": [
+                {
+                  "start": 0,
+                  "end": 20,
+                  "text": "Total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "direction": {
+              "status": "supported",
+              "value": "increase",
+              "anchors": [
+                {
+                  "start": 21,
+                  "end": 30,
+                  "text": "increased"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "source_context": {
+              "status": "supported",
+              "value": "dim-lit",
+              "anchors": [
+                {
+                  "start": 34,
+                  "end": 41,
+                  "text": "dim-lit"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            }
+          },
+          "binding_anchor": {
+            "start": 42,
+            "end": 55,
+            "text": "Luma cultures"
+          },
+          "molecule_specific_emission_allowed": false
+        }
+      ],
+      "negative_assertions": [
+        "Retain supported source_context independently of both unknown molecule and unknown stimulus_agent.",
+        "Do not equate an environmental adjective with a treatment or a particular stimulus agent.",
+        "A context-only evidence fragment is allowed; a molecule-specific candidate is not supported."
+      ]
+    },
+    {
+      "id": "negative_total_component_different_arms",
+      "synthetic": true,
+      "text": "Vellun increased total ATP production in dim-lit Luma cultures, whereas Nerune increased mitochondrial ATP production in bright-still Mera cultures.",
+      "expected_arms": [
+        {
+          "arm_id": "total_luma",
+          "fields": {
+            "dose": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No dose is stated."
+            },
+            "exposure": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No exposure duration is stated."
+            },
+            "value": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "Only a qualitative direction is stated."
+            },
+            "unit": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No numerical result or unit is stated."
+            },
+            "comparator": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No comparator is explicitly identified."
+            },
+            "stimulus_agent": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "A contextual condition does not identify a causal stimulus agent."
+            },
+            "molecule": {
+              "status": "supported",
+              "value": "Vellun",
+              "anchors": [
+                {
+                  "start": 0,
+                  "end": 6,
+                  "text": "Vellun"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "cell_or_model": {
+              "status": "supported",
+              "value": "Luma cultures",
+              "anchors": [
+                {
+                  "start": 49,
+                  "end": 62,
+                  "text": "Luma cultures"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint": {
+              "status": "supported",
+              "value": "total ATP production",
+              "anchors": [
+                {
+                  "start": 17,
+                  "end": 37,
+                  "text": "total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint_scope": {
+              "status": "supported",
+              "value": "TOTAL",
+              "anchors": [
+                {
+                  "start": 17,
+                  "end": 37,
+                  "text": "total ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "direction": {
+              "status": "supported",
+              "value": "increase",
+              "anchors": [
+                {
+                  "start": 7,
+                  "end": 16,
+                  "text": "increased"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "source_context": {
+              "status": "supported",
+              "value": "dim-lit",
+              "anchors": [
+                {
+                  "start": 41,
+                  "end": 48,
+                  "text": "dim-lit"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            }
+          },
+          "binding_anchor": {
+            "start": 49,
+            "end": 62,
+            "text": "Luma cultures"
+          },
+          "molecule_specific_emission_allowed": true
+        },
+        {
+          "arm_id": "component_mera",
+          "fields": {
+            "dose": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No dose is stated."
+            },
+            "exposure": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No exposure duration is stated."
+            },
+            "value": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "Only a qualitative direction is stated."
+            },
+            "unit": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No numerical result or unit is stated."
+            },
+            "comparator": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "No comparator is explicitly identified."
+            },
+            "stimulus_agent": {
+              "status": "unknown",
+              "value": null,
+              "anchors": [],
+              "reason": "A contextual condition does not identify a causal stimulus agent."
+            },
+            "molecule": {
+              "status": "supported",
+              "value": "Nerune",
+              "anchors": [
+                {
+                  "start": 72,
+                  "end": 78,
+                  "text": "Nerune"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "cell_or_model": {
+              "status": "supported",
+              "value": "Mera cultures",
+              "anchors": [
+                {
+                  "start": 134,
+                  "end": 147,
+                  "text": "Mera cultures"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint": {
+              "status": "supported",
+              "value": "mitochondrial ATP production",
+              "anchors": [
+                {
+                  "start": 89,
+                  "end": 117,
+                  "text": "mitochondrial ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "endpoint_scope": {
+              "status": "supported",
+              "value": "MITOCHONDRIAL_COMPONENT",
+              "anchors": [
+                {
+                  "start": 89,
+                  "end": 117,
+                  "text": "mitochondrial ATP production"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "direction": {
+              "status": "supported",
+              "value": "increase",
+              "anchors": [
+                {
+                  "start": 79,
+                  "end": 88,
+                  "text": "increased"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            },
+            "source_context": {
+              "status": "supported",
+              "value": "bright-still",
+              "anchors": [
+                {
+                  "start": 121,
+                  "end": 133,
+                  "text": "bright-still"
+                }
+              ],
+              "reason": "Explicit in this arm of the synthetic sentence."
+            }
+          },
+          "binding_anchor": {
+            "start": 134,
+            "end": 147,
+            "text": "Mera cultures"
+          },
+          "molecule_specific_emission_allowed": true
+        }
+      ],
+      "negative_assertions": [
+        "Do not transfer the total arm context, molecule, or model to the component arm, or vice versa.",
+        "Do not normalize the component endpoint to TOTAL or infer an unmentioned component.",
+        "The contrastive conjunction starts a separate subject/result arm; all field anchors must remain in the proper arm."
+      ]
+    }
+  ],
+  "validation_record": {
+    "case_count": 4,
+    "real_material_exported": false,
+    "generation_method": "New synthetic sentences, not token-by-token substitution of an author quote. Only generic relation shapes were reused.",
+    "private_source_recheck": "Read-only Mac verification; source SHA, XPath and target clause correspondence rechecked locally. No source identifiers or hash exported into this fixture.",
+    "protection": "227 selected previously protected file hashes matched; original worktree status and production database size/mtime/inode unchanged. Previous 1370-file full check was reused, not repeated or relabelled as a fresh complete check.",
+    "environment": "Mac initially online, then became unreachable during a final scope check; no retry loop or alternate access attempted. No Mac file writes occurred.",
+    "execution": "No extraction, migration, CLI execution, network request, product/source modification, database write, PR update or deployment."
+  }
+}

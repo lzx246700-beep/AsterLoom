@@ -1,0 +1,17 @@
+{
+  "id": "small_molecule_atp",
+  "entity": "tested_small_molecule",
+  "conditions": "all_cell_and_tissue_models_keep_own_units",
+  "queries": ["intracellular ATP", "ATP content", "ATP production rate", "oxygen consumption rate"],
+  "endpoints": {
+    "ATP_RATE": "(?:mitochondrial |glycolytic |total )?ATP (?:production|generation|synthesis) rates?|rates? of ATP (?:production|generation|synthesis)",
+    "ATP_PRODUCTION_REPORTED": "(?:mitochondrial |cellular )?ATP (?:production|synthesis|generation)",
+    "ATP_CONTENT": "(?:intracellular |cellular |total |mitochondrial |tissue )?ATP (?:content|levels?|concentrations?|pools?)|(?:intracellular |cellular |total |mitochondrial |tissue )?(?:content|levels?|concentrations?) of (?:cellular |intracellular )?ATP|(?:intracellular|cellular) ATP",
+    "OXYGEN_CONSUMPTION": "(?:(?:basal|maximal|mitochondrial|ATP-linked|ATP linked) )?(?:oxygen consumption(?: rates?)?|OCR)"
+  },
+  "exclude": "extracellular ATP|released ATP|ATP release|ATP-dependent viability|ATP-based viability|ATP levels? in (?:the )?(?:medium|supernatant|plasma|serum)",
+  "absolute_unit": "(?:[mμµunp]?mol(?:es)?)\\s*(?:/|per )\\s*(?:(?:min|h)\\s*/\\s*)?(?:(?:mg|g)(?:\\s+(?:of\\s+)?(?:protein|tissue))?|(?:10[⁶6] )?cells?)",
+  "methods": "lucifer(?:ase|in)|bioluminescen|ATP (?:assay|determination|detection) kit|Seahorse|extracellular flux|HPLC",
+  "strategies": ["result_clause", "native_rectangular_table"],
+  "levels": ["L1", "L2", "L3"], "training": "exploratory_candidates_only", "strict_review_task": "raw2647_lps100_atp_nmol_per_viable_cell/v1"
+}

@@ -1,0 +1,100 @@
+{
+  "base_fields": [
+    "provenance.author_sha256",
+    "provenance.original_locator",
+    "observation.author_numeric",
+    "observation.author_literal",
+    "observation.endpoint",
+    "dataset.study_group"
+  ],
+  "contract": "r031.dbcontract/1",
+  "extraction_capabilities": [
+    "native-JATS-table",
+    "author-Methods",
+    "official-SI-openpyxl",
+    "source-role-first",
+    "chemical-testedform-matcher-HOLD"
+  ],
+  "id": "small_molecule_atp_content_v1",
+  "label": "SmallMoleculeATPContent v1",
+  "plugin_api": "r031_evidence.r23_profiles.ProfilePlugin/1",
+  "projection": {
+    "default": "NO_FIT_SOURCE_ONLY",
+    "format": [
+      "jsonl",
+      "csv"
+    ],
+    "grouped_split": [
+      "study",
+      "verified_parent_if_available",
+      "material_batch_if_author_reported"
+    ],
+    "separate_author_native_and_normalized": true
+  },
+  "qualification": {
+    "allow_derived_effect_without_author_same_assay_control": false,
+    "automatic_Gold": false,
+    "review": "INDEPENDENT_SCI_REQUIRED"
+  },
+  "qualification_rules": [
+    "atp_pool_not_cell_viability",
+    "no_CTG_signal_without_calibration",
+    "absolute_not_matched_effect",
+    "verified_tested_form_and_parent_for_fully_qualified_X",
+    "same_run_control_required_only_for_relative_Y"
+  ],
+  "retrieval_policy": {
+    "assay_first": [
+      "ATP content",
+      "ATP luminescence calibrated ATP concentration",
+      "cellular ATP concentration",
+      "nmol/mg protein",
+      "ATP pool"
+    ],
+    "source_context": [
+      "cell model",
+      "dose",
+      "24 h",
+      "normalization",
+      "primary table",
+      "supplementary raw ATP matrix"
+    ]
+  },
+  "schema": "r031.profile/1",
+  "source_priority": [
+    "author-JATS",
+    "official-SI-XLSX-CSV",
+    "licensed-PDF",
+    "author-Methods"
+  ],
+  "status": "DRAFT_SOURCE_ONLY",
+  "version": "1.0.0",
+  "views": [
+    {
+      "conditional": [
+        "arm.control_linkage",
+        "assay.independent_biological_n"
+      ],
+      "endpoint_allow": [
+        "ATP_CONTENT"
+      ],
+      "forbidden_endpoints": [
+        "ATP_GENERATION_RATE",
+        "ATP_LINKED_OCR",
+        "OXYGEN_CONSUMPTION",
+        "ATPASE_ACTIVITY"
+      ],
+      "id": "atp_content_absolute_v1",
+      "required": [
+        "chemical.tested_form_literal",
+        "chemical.parent_structure",
+        "biological.model_literal",
+        "conditions.dose_literal",
+        "conditions.exposure_time_literal",
+        "assay.method_locator",
+        "observation.native_unit",
+        "assay.normalization_basis"
+      ]
+    }
+  ]
+}

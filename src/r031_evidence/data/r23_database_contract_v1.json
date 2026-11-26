@@ -1,0 +1,1026 @@
+{
+  "allowed_missing_states": [
+    "NOT_REPORTED",
+    "NOT_TESTED",
+    "NOT_MEASURED",
+    "MEASURED_NO_SIGNIFICANT_EFFECT",
+    "ACCESS_HOLD",
+    "UNVERIFIED_SOURCE",
+    "AMBIGUOUS",
+    "NOT_APPLICABLE"
+  ],
+  "entity_types": {
+    "AssayRun": {
+      "id": "assay_run:<paper_key+author_assay_id>",
+      "independent_run_must_be_verified": true
+    },
+    "BiologicalModel": {
+      "id": "bio_model:<study+literal>"
+    },
+    "ChemicalParent": {
+      "id": "parent:<verified_InChIKey>",
+      "unknown_parent_id": null
+    },
+    "ComparatorArm": {
+      "id": "arm:<author_source+source_locator>",
+      "matched_criteria": "same_assay_method_model_endpoint_units"
+    },
+    "Material": {
+      "id": "material:<study+author_formulation_literal>"
+    },
+    "MaterialBatch": {
+      "id": "material_batch:<author_batch_id>",
+      "requires_author_batch": true
+    },
+    "MeasuredArm": {
+      "id": "arm:<author_source+source_locator>"
+    },
+    "ObservedMeasurement": {
+      "id": "obs:<r17_measurement_id>"
+    },
+    "Paper": {
+      "id": "paper:<source_original_id>"
+    },
+    "ReactionEvent": {
+      "id": "reaction:<author_chemistry_source>",
+      "requires_actual_reaction": true
+    },
+    "ReviewDecision": {
+      "automatic_Gold_forbidden": true,
+      "id": "review:<independent_assessor+version>"
+    },
+    "SourceAnchor": {
+      "id": "anchor:<source_sha+source_locator>"
+    },
+    "SourceAsset": {
+      "id": "asset:<original_sha256>"
+    },
+    "Study": {
+      "id": "study:<paper_key|independent_verified_study>"
+    },
+    "TaskDataset": {
+      "id": "dataset:<profile_version+source_snapshot_SHA>",
+      "no_fit_default": true
+    },
+    "TestedForm": {
+      "cross_paper_identity_requires_structure": true,
+      "id": "tested_form:<study+author_form_literal>"
+    }
+  },
+  "fields": [
+    {
+      "author_sources": [
+        "METADATA"
+      ],
+      "denominator": null,
+      "field": "provenance.paper_id",
+      "kind": "string",
+      "meaning": "Single original research / paper identity",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "required",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "JATS",
+        "SI",
+        "PDF"
+      ],
+      "denominator": null,
+      "field": "provenance.author_sha256",
+      "kind": "sha256",
+      "meaning": "Byte-level verified author original",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "required",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "JATS",
+        "SI",
+        "PDF"
+      ],
+      "denominator": null,
+      "field": "provenance.original_locator",
+      "kind": "string",
+      "meaning": "JATS XPath, sheet A1, CSV row, or PDF page+box",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "required",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "SI",
+        "PDF"
+      ],
+      "denominator": null,
+      "field": "observation.author_numeric",
+      "kind": "number",
+      "meaning": "Native author value, not normalized or inferred",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "required",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "SI",
+        "PDF"
+      ],
+      "denominator": null,
+      "field": "observation.author_literal",
+      "kind": "string",
+      "meaning": "Author unedited literal",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "required",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "observation.native_unit",
+      "kind": "string",
+      "meaning": "Native unit from same experiment/header",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": "endpoint dependent"
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "observation.endpoint",
+      "kind": "string",
+      "meaning": "Exact semantic endpoint; ATP pool != ATP rate != OCR != ATPase",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "required",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "observation.normalized_numeric",
+      "kind": "number|null",
+      "meaning": "ONLY a declared deterministic conversion with version and provenance",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "optional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "observation.uncertainty",
+      "kind": "number|null",
+      "meaning": "Author SD/SEM/CI, do not invent",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "optional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "assay.method_locator",
+      "kind": "string|null",
+      "meaning": "Author method matched to this specific assay",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "assay.platform",
+      "kind": "string|null",
+      "meaning": "Instrument/kit explicitly named by source",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "assay.run_author_id",
+      "kind": "string|null",
+      "meaning": "Real independent assay run or batch; parser experiment ID is not a true biological run",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "assay.independent_biological_n",
+      "kind": "integer|null",
+      "meaning": "Independent biological replicate count, NOT technical well count",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "assay.technical_well_n",
+      "kind": "integer|null",
+      "meaning": "Technical repeat count",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "optional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "arm.author_group_literal",
+      "kind": "string|null",
+      "meaning": "Author treatment/vehicle/control group",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "arm.arm_role",
+      "kind": "string|null",
+      "meaning": "Measured versus comparator; don't infer by order",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "arm.control_linkage",
+      "kind": "string|null",
+      "meaning": "Exact author same-assay treatment/control relation",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "biological.model_literal",
+      "kind": "string|null",
+      "meaning": "Original cell/species/tissue organism; not chemical identity",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "biological.stimulus_literal",
+      "kind": "string|null",
+      "meaning": "Injury/inflammation/stress context",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "conditions.dose_literal",
+      "kind": "string|null",
+      "meaning": "Author intervention dose and concentration units",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "conditions.exposure_time_literal",
+      "kind": "string|null",
+      "meaning": "Author time measured from defined exposure",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "chemical.tested_form_literal",
+      "kind": "string|null",
+      "meaning": "Actual tested salt/derivative/mixture author name, not presumed parent",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "chemical.parent_structure",
+      "kind": "string|null",
+      "meaning": "Verified isomeric SMILES or InChIKey, NEVER guessed from shorthand",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "chemical.natural_provenance",
+      "kind": "string|null",
+      "meaning": "Separate author natural source evidence, not chemical identity",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "material.formulation_literal",
+      "kind": "string|null",
+      "meaning": "Real author material/group code, not a polymer structure",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "material.reaction_anchor",
+      "kind": "string|null",
+      "meaning": "Source chemistry reaction conditions and covalent bond proof",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "material.batch_id",
+      "kind": "string|null",
+      "meaning": "Actual independently synthesized material batch",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "material.feed_fraction",
+      "kind": "number|null",
+      "meaning": "Nominal charged monomer fraction, not incorporation",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "optional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "material.measured_incorporation",
+      "kind": "number|null",
+      "meaning": "Author measured covalent fraction, NOT feed",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "material.release_analyte",
+      "kind": "string|null",
+      "meaning": "Physically loaded molecule vs covalently liberated product",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "cohort.tested_n",
+      "kind": "integer|null",
+      "meaning": "Complete actual author screened denominator",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "cohort.nonhit_measured",
+      "kind": "boolean|null",
+      "meaning": "Original measured NS != unreported/untested",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "dataset.study_group",
+      "kind": "string",
+      "meaning": "Study-level grouping, not each spreadsheet row",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "required",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "dataset.parent_group",
+      "kind": "string|null",
+      "meaning": "Verified chemical parent/scaffold group to avoid leaks",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "dataset.material_batch_group",
+      "kind": "string|null",
+      "meaning": "Actual material batch/reaction family",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "assay.normalization_basis",
+      "kind": "string|null",
+      "meaning": "Author assay normalization basis, not guessed from /mg",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "assay.algorithm_literal",
+      "kind": "string|null",
+      "meaning": "Source-author Seahorse ATP rate algorithm TOTAL/MITO/GLYCO",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    },
+    {
+      "author_sources": [
+        "TABLE",
+        "SI"
+      ],
+      "denominator": "time",
+      "field": "observation.time_denominator",
+      "kind": "string|null",
+      "meaning": "Actual ATP production rate time denominator from author unit",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": "amount/time"
+    },
+    {
+      "author_sources": [
+        "METHODS",
+        "SI"
+      ],
+      "denominator": null,
+      "field": "material.covalent_link_proof",
+      "kind": "string|null",
+      "meaning": "Explicit author proof for chemical covalent bioactive unit, not physical loading",
+      "missing_semantics": [
+        "NOT_REPORTED",
+        "NOT_TESTED",
+        "NOT_MEASURED",
+        "ACCESS_HOLD",
+        "UNVERIFIED_SOURCE",
+        "AMBIGUOUS",
+        "NOT_APPLICABLE"
+      ],
+      "required": "conditional",
+      "unit_dimension": null
+    }
+  ],
+  "logical_relations": [
+    [
+      "Paper",
+      "has",
+      "SourceAsset"
+    ],
+    [
+      "SourceAsset",
+      "contains",
+      "SourceAnchor"
+    ],
+    [
+      "SourceAnchor",
+      "attests",
+      "ObservedMeasurement"
+    ],
+    [
+      "Study",
+      "contains",
+      "AssayRun"
+    ],
+    [
+      "AssayRun",
+      "has",
+      "MeasuredArm"
+    ],
+    [
+      "MeasuredArm",
+      "linked_when_author_supported",
+      "ComparatorArm"
+    ],
+    [
+      "TestedForm",
+      "may_reference_verified",
+      "ChemicalParent"
+    ],
+    [
+      "MeasuredArm",
+      "tests",
+      "TestedForm"
+    ],
+    [
+      "MeasuredArm",
+      "has_assay",
+      "ObservedMeasurement"
+    ],
+    [
+      "MaterialBatch",
+      "produced_by",
+      "ReactionEvent"
+    ],
+    [
+      "MaterialBatch",
+      "tested_in",
+      "AssayRun"
+    ],
+    [
+      "ReviewDecision",
+      "may_qualify_only_with_authority",
+      "TaskDataset"
+    ]
+  ],
+  "physical_DDL_migration": "NONE_R23_DRAFT_ONLY",
+  "provenance_layers": [
+    "AUTHOR_ORIGINAL_BYTES",
+    "RAW_AUTHOR_OBSERVATION",
+    "VERSIONED_NORMALIZED_FACT",
+    "DERIVED_TASK_CANDIDATE",
+    "SCI_APPROVED_GOLD"
+  ],
+  "purpose": "Database-contract-first source-native scientific evidence and source-only task projections",
+  "schema": "r031.dbcontract/1",
+  "scientific_invariants": [
+    "Original author numeric/source_literal/unit/locator/SHA immutable",
+    "Unknown is null, NEVER zero or fake structure",
+    "No parent without verified structural evidence",
+    "An author's study row is not independent biological n",
+    "No normalizing units without assay-aware explicit deterministic conversion and version",
+    "ATP_CONTENT != ATP_GENERATION_RATE != ATP_LINKED_OCR != OCR != ATPASE",
+    "Biological target organism != tested substance",
+    "Measured feed fraction != covalent incorporation",
+    "Physical hydrogel property != covalent polymer cell response",
+    "Unreported or not tested != measured NS",
+    "No row-level train/test split within one paper/batch/parent",
+    "NO_FIT candidates are not SCI-approved Gold"
+  ],
+  "source_priority": [
+    "author-JATS",
+    "official-original-SI-XLSX-CSV",
+    "licensed-PDF-with-page-bbox",
+    "author-Methods"
+  ],
+  "source_states": [
+    "SOURCE_CONFIRMED",
+    "SOURCE_ONLY_HOLD",
+    "TASK_READY_CANDIDATE",
+    "SCI_APPROVED_GOLD"
+  ],
+  "sources": [
+    "V4_DATABASE_FIRST_MODEL_READY_SCHEMA_BLUEPRINT_DRAFT_R01",
+    "CH1_AI_READY_EXPERIMENTAL_DATABASE_STANDARD_PROPOSAL_R01",
+    "V4_DBX_SHARED_SCHEMA_AND_SAFETY_CONTRACT_R01"
+  ],
+  "status": "DRAFT_NOT_APPROVED",
+  "training_approval": false,
+  "version": "1.0.0"
+}

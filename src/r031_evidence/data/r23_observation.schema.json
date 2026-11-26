@@ -1,0 +1,248 @@
+{
+  "$id": "urn:r031:dbcontract:observation:1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arm": {
+      "type": "object"
+    },
+    "assay": {
+      "type": "object"
+    },
+    "biological": {
+      "type": "object"
+    },
+    "chemical": {
+      "type": "object"
+    },
+    "conditions": {
+      "type": "object"
+    },
+    "dataset": {
+      "properties": {
+        "material_batch_group": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parent_group": {
+          "type": "null"
+        },
+        "split": {
+          "enum": [
+            "development_train",
+            "heldout_validation",
+            "heldout_test"
+          ]
+        },
+        "study_group": {
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "required": [
+        "study_group",
+        "parent_group",
+        "material_batch_group",
+        "split"
+      ],
+      "type": "object"
+    },
+    "ids": {
+      "properties": {
+        "arm_id": {
+          "minLength": 3,
+          "type": "string"
+        },
+        "assay_run_id": {
+          "minLength": 3,
+          "type": "string"
+        },
+        "observation_id": {
+          "minLength": 3,
+          "type": "string"
+        },
+        "source_asset_id": {
+          "minLength": 3,
+          "type": "string"
+        },
+        "study_id": {
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "required": [
+        "observation_id",
+        "source_asset_id",
+        "study_id",
+        "assay_run_id",
+        "arm_id"
+      ],
+      "type": "object"
+    },
+    "material": {
+      "type": "object"
+    },
+    "missing_fields": {
+      "type": "object"
+    },
+    "observation": {
+      "properties": {
+        "author_literal": {
+          "type": "string"
+        },
+        "author_numeric": {
+          "type": "number"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "native_measurement_id": {
+          "type": "string"
+        },
+        "native_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "normalization_transform_version": {
+          "type": "null"
+        },
+        "normalized_numeric": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "native_measurement_id",
+        "endpoint",
+        "author_numeric",
+        "author_literal",
+        "native_unit",
+        "normalized_numeric",
+        "normalization_transform_version"
+      ],
+      "type": "object"
+    },
+    "paper": {
+      "properties": {
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "paper_key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "paper_key"
+      ],
+      "type": "object"
+    },
+    "profile": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "profile_version": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "provenance": {
+      "properties": {
+        "author_literal": {
+          "type": "string"
+        },
+        "author_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "byte_sha_verified": {
+          "const": true
+        },
+        "original_locator": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_file": {
+          "type": "string"
+        },
+        "source_tier": {
+          "const": "AUTHOR_ORIGINAL"
+        }
+      },
+      "required": [
+        "author_sha256",
+        "original_locator",
+        "author_literal",
+        "byte_sha_verified",
+        "source_tier",
+        "source_file"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "r031.dbcontract/1"
+    },
+    "task": {
+      "properties": {
+        "approved_training_y": {
+          "type": "null"
+        },
+        "candidate_target": {
+          "type": "number"
+        },
+        "decision": {
+          "enum": [
+            "SOURCE_ONLY_HOLD",
+            "TASK_READY_CANDIDATE"
+          ]
+        },
+        "qualification": {
+          "const": "NO_FIT"
+        },
+        "reason_codes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "decision",
+        "qualification",
+        "reason_codes",
+        "candidate_target",
+        "approved_training_y"
+      ],
+      "type": "object"
+    },
+    "view": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile",
+    "profile_version",
+    "view",
+    "ids",
+    "paper",
+    "provenance",
+    "assay",
+    "arm",
+    "chemical",
+    "material",
+    "biological",
+    "conditions",
+    "observation",
+    "task",
+    "missing_fields",
+    "dataset"
+  ],
+  "title": "AsterLoom DRAFT profile-native observation record",
+  "type": "object"
+}

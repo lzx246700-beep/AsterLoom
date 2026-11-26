@@ -1,0 +1,101 @@
+{
+  "base_fields": [
+    "provenance.author_sha256",
+    "provenance.original_locator",
+    "observation.author_numeric",
+    "observation.author_literal",
+    "observation.endpoint",
+    "dataset.study_group"
+  ],
+  "contract": "r031.dbcontract/1",
+  "extraction_capabilities": [
+    "native-JATS-table",
+    "author-Methods",
+    "official-SI-openpyxl",
+    "explicit-rate-denominator",
+    "Seahorse-version-review-HOLD"
+  ],
+  "id": "small_molecule_atp_rate_v1",
+  "label": "SmallMoleculeATPRate v1",
+  "plugin_api": "r031_evidence.r23_profiles.ProfilePlugin/1",
+  "projection": {
+    "default": "NO_FIT_SOURCE_ONLY",
+    "format": [
+      "jsonl",
+      "csv"
+    ],
+    "grouped_split": [
+      "study",
+      "verified_parent_if_available",
+      "material_batch_if_author_reported"
+    ],
+    "separate_author_native_and_normalized": true
+  },
+  "qualification": {
+    "allow_derived_effect_without_author_same_assay_control": false,
+    "automatic_Gold": false,
+    "review": "INDEPENDENT_SCI_REQUIRED"
+  },
+  "qualification_rules": [
+    "must_be_native_AUTHOR_ATP_GENERATION_RATE",
+    "OCR_is_not_rate",
+    "require_rate_denominator",
+    "TOTAL_MITO_GLYCO_author_only",
+    "no_derived_rate_from_OCR"
+  ],
+  "retrieval_policy": {
+    "assay_first": [
+      "Seahorse XF ATP Rate Assay",
+      "mitoATP production rate",
+      "glycoATP production rate",
+      "total ATP production rate",
+      "ATP production nmol/min"
+    ],
+    "source_context": [
+      "Seahorse",
+      "ATP Rate Kit",
+      "normalization",
+      "supplementary tables",
+      "Methods algorithm"
+    ]
+  },
+  "schema": "r031.profile/1",
+  "source_priority": [
+    "author-JATS",
+    "official-SI-XLSX-CSV",
+    "licensed-PDF",
+    "author-Methods"
+  ],
+  "status": "DRAFT_SOURCE_ONLY",
+  "version": "1.0.0",
+  "views": [
+    {
+      "conditional": [
+        "arm.control_linkage",
+        "assay.independent_biological_n"
+      ],
+      "endpoint_allow": [
+        "ATP_GENERATION_RATE"
+      ],
+      "forbidden_endpoints": [
+        "ATP_CONTENT",
+        "ATP_LINKED_OCR",
+        "OXYGEN_CONSUMPTION",
+        "ATPASE_ACTIVITY"
+      ],
+      "id": "atp_rate_total_mito_glyco_v1",
+      "required": [
+        "chemical.tested_form_literal",
+        "chemical.parent_structure",
+        "biological.model_literal",
+        "conditions.dose_literal",
+        "conditions.exposure_time_literal",
+        "assay.method_locator",
+        "assay.platform",
+        "assay.algorithm_literal",
+        "observation.native_unit",
+        "observation.time_denominator"
+      ]
+    }
+  ]
+}

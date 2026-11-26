@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns:xlink="http://www.w3.org/1999/xlink" article-type="research-article">
+  <front>
+    <article-meta>
+      <article-id pub-id-type="pmcid">PMC00000000</article-id>
+      <title-group>
+        <article-title>Synthetic fixture: effects of compound X on cellular ATP content</article-title>
+      </title-group>
+      <permissions>
+        <license xlink:href="https://creativecommons.org/licenses/by/4.0/">
+          <license-p>This is a synthetic, non-published fixture created for AsterLoom documentation and offline tests.</license-p>
+        </license>
+      </permissions>
+    </article-meta>
+  </front>
+  <body>
+    <sec>
+      <title>Results</title>
+      <p>
+        This synthetic paragraph does not report a real experiment.
+        Cellular ATP content was described only to exercise the offline screen.
+      </p>
+      <fig id="fig1">
+        <label>Figure 1</label>
+        <caption>
+          <title>Cellular ATP content.</title>
+          <p>
+            ATP content in treated cells versus control, expressed as percent of control
+            (mean +/- s.e.m., n = 3). An ATP assay was used to quantify intracellular ATP levels.
+          </p>
+        </caption>
+        <graphic xlink:href="fig1-synthetic.jpg"/>
+      </fig>
+    </sec>
+  </body>
+</article>

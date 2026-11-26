@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bio-r031:r04:source-pair-type-safe:v1",
+  "title": "ATP Source Evidence Pair — hard endpoint and statistics constraints",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_sha256",
+    "table_id",
+    "treated",
+    "control",
+    "source_unit_literal",
+    "unit_dimension",
+    "endpoint_task",
+    "endpoint_subtype",
+    "assay_scope_id",
+    "numeric_statistic_type",
+    "scientific_hold_reasons",
+    "time_context",
+    "treatment_exposure_duration",
+    "status",
+    "gold_approved"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ATP_R04_TYPE_SAFE_GRAPH_V1"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "table_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "treated": {
+      "type": "object",
+      "required": [
+        "statistic",
+        "value",
+        "literal",
+        "cell_anchor",
+        "row",
+        "col"
+      ],
+      "properties": {
+        "statistic": {
+          "enum": [
+            "MEAN_WITH_UNCERTAINTY",
+            "MEDIAN_WITH_RANGE"
+          ]
+        },
+        "value": {
+          "type": "number"
+        },
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell_anchor": {
+          "type": "string",
+          "minLength": 2
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "col": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "uncertainty": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "uncertainty_kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "range_min": {
+          "type": "number"
+        },
+        "range_max": {
+          "type": "number"
+        },
+        "significance_mark": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "control": {
+      "type": "object",
+      "required": [
+        "statistic",
+        "value",
+        "literal",
+        "cell_anchor",
+        "row",
+        "col"
+      ],
+      "properties": {
+        "statistic": {
+          "enum": [
+            "MEAN_WITH_UNCERTAINTY",
+            "MEDIAN_WITH_RANGE"
+          ]
+        },
+        "value": {
+          "type": "number"
+        },
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell_anchor": {
+          "type": "string",
+          "minLength": 2
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "col": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "uncertainty": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "uncertainty_kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "range_min": {
+          "type": "number"
+        },
+        "range_max": {
+          "type": "number"
+        },
+        "significance_mark": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "source_unit_literal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unit_dimension": {
+      "enum": [
+        "AMOUNT_NORMALIZED_PER_CELLS_OR_PROTEIN",
+        "AMOUNT_PER_TIME",
+        "AMOUNT",
+        "DIMENSIONLESS_OR_SCALED",
+        "UNKNOWN_UNIT"
+      ]
+    },
+    "endpoint_task": {
+      "enum": [
+        "ATP_CONTENT",
+        "ATP_PRODUCTION_RATE"
+      ]
+    },
+    "endpoint_subtype": {
+      "enum": [
+        "ATP_CONTENT",
+        "RATE_TOTAL",
+        "RATE_MITO",
+        "RATE_GLYCO"
+      ]
+    },
+    "numeric_statistic_type": {
+      "enum": [
+        "MEAN_WITH_UNCERTAINTY",
+        "MEDIAN_WITH_RANGE"
+      ]
+    },
+    "assay_scope_id": {
+      "type": "string",
+      "minLength": 10
+    },
+    "scientific_hold_reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "time_context": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "treatment_exposure_duration": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "status": {
+      "const": "SOURCE_HOLD"
+    },
+    "gold_approved": {
+      "const": false
+    },
+    "independent_SCI_verified": {
+      "const": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "endpoint_task": {
+            "const": "ATP_CONTENT"
+          }
+        },
+        "required": [
+          "endpoint_task"
+        ]
+      },
+      "then": {
+        "properties": {
+          "unit_dimension": {
+            "const": "AMOUNT_NORMALIZED_PER_CELLS_OR_PROTEIN"
+          },
+          "endpoint_subtype": {
+            "const": "ATP_CONTENT"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "endpoint_task": {
+            "const": "ATP_PRODUCTION_RATE"
+          }
+        },
+        "required": [
+          "endpoint_task"
+        ]
+      },
+      "then": {
+        "properties": {
+          "unit_dimension": {
+            "const": "AMOUNT_PER_TIME"
+          },
+          "endpoint_subtype": {
+            "enum": [
+              "RATE_TOTAL",
+              "RATE_MITO",
+              "RATE_GLYCO"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "numeric_statistic_type": {
+            "const": "MEDIAN_WITH_RANGE"
+          }
+        },
+        "required": [
+          "numeric_statistic_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "treated": {
+            "required": [
+              "range_min",
+              "range_max"
+            ],
+            "properties": {
+              "statistic": {
+                "const": "MEDIAN_WITH_RANGE"
+              }
+            }
+          },
+          "control": {
+            "required": [
+              "range_min",
+              "range_max"
+            ],
+            "properties": {
+              "statistic": {
+                "const": "MEDIAN_WITH_RANGE"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "numeric_statistic_type": {
+            "const": "MEAN_WITH_UNCERTAINTY"
+          }
+        },
+        "required": [
+          "numeric_statistic_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "treated": {
+            "properties": {
+              "statistic": {
+                "const": "MEAN_WITH_UNCERTAINTY"
+              }
+            }
+          },
+          "control": {
+            "properties": {
+              "statistic": {
+                "const": "MEAN_WITH_UNCERTAINTY"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "time_context": {
+            "type": "object",
+            "properties": {
+              "time_context_kind": {
+                "const": "STORAGE_TIME"
+              }
+            },
+            "required": [
+              "time_context_kind"
+            ]
+          }
+        },
+        "required": [
+          "time_context"
+        ]
+      },
+      "then": {
+        "properties": {
+          "treatment_exposure_duration": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

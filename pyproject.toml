@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68,<82"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "r031-evidence"
+version = "0.39.12"
+description = "AsterLoom (星织): a source-first multimodal scientific evidence extraction framework"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+excel = ["openpyxl==3.1.5"]
+
+[project.scripts]
+r031-evidence = "r031_evidence.cli:main"
+r031 = "r031_evidence.r21_product:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["r031_evidence*"]
+
+[tool.setuptools.package-data]
+r031_evidence = ["data/*.sql", "data/*.json", "data/*.swift", "profiles/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

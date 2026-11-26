@@ -1,0 +1,7 @@
+{
+  "catalog_sha256": "67740a32bf36ff6c8775e27ba8c3e44e118008cd576f8eecf51b6b73e99ec9c3",
+  "catalog_source": "Independent frozen R08 public release manifests; not arbitrary batch self assertion",
+  "future_new_trusted_release_requires": "separate operator-approved trusted pin update and original author SHA/license verification",
+  "registry_contract": "R031_TRUSTED_SOURCE_RELEASE_V1",
+  "status": "SCI_AND_MASTER_PREVIOUSLY_RELEASED_SOURCE_PIN_VERIFIED"
+}

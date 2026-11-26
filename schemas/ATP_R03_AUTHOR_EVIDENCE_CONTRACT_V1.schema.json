@@ -1,0 +1,270 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:researchos:r031:atp-r03:author-evidence:1",
+  "title": "R031 R03 Author Source Evidence Pair — proposed only",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "observation_id",
+    "pmcid",
+    "doi",
+    "source_sha256",
+    "table_id",
+    "treated",
+    "control",
+    "statistic_type",
+    "endpoint_task",
+    "author_unit",
+    "time_context",
+    "treatment_exposure_duration",
+    "exposure_duration_missing_reason",
+    "science_hold_reasons",
+    "status",
+    "gold_approved",
+    "source_role_at_R03",
+    "assay_record_id",
+    "screen_cohort_id"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "R031_R03_TABLEGRAPH_V1"
+    },
+    "observation_id": {
+      "type": "string",
+      "pattern": "^r03:obs:[0-9a-f]{24}$"
+    },
+    "pmcid": {
+      "type": "string",
+      "pattern": "^PMC[0-9]+$"
+    },
+    "doi": {
+      "type": "string",
+      "minLength": 5
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "table_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "treated": {
+      "type": "object",
+      "required": [
+        "statistic",
+        "value",
+        "literal",
+        "cell_anchor",
+        "row",
+        "col"
+      ],
+      "properties": {
+        "statistic": {
+          "enum": [
+            "MEAN_WITH_UNCERTAINTY",
+            "MEDIAN_WITH_RANGE"
+          ]
+        },
+        "value": {
+          "type": "number"
+        },
+        "uncertainty": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "range_min": {
+          "type": "number"
+        },
+        "range_max": {
+          "type": "number"
+        },
+        "uncertainty_kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "significance_mark": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell_anchor": {
+          "type": "string",
+          "minLength": 5
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "col": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "xml_fragment": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "control": {
+      "type": "object",
+      "required": [
+        "statistic",
+        "value",
+        "literal",
+        "cell_anchor",
+        "row",
+        "col"
+      ],
+      "properties": {
+        "statistic": {
+          "enum": [
+            "MEAN_WITH_UNCERTAINTY",
+            "MEDIAN_WITH_RANGE"
+          ]
+        },
+        "value": {
+          "type": "number"
+        },
+        "uncertainty": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "range_min": {
+          "type": "number"
+        },
+        "range_max": {
+          "type": "number"
+        },
+        "uncertainty_kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "significance_mark": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cell_anchor": {
+          "type": "string",
+          "minLength": 5
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "col": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "xml_fragment": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "statistic_type": {
+      "enum": [
+        "MEAN_WITH_UNCERTAINTY",
+        "MEDIAN_WITH_RANGE"
+      ]
+    },
+    "endpoint_task": {
+      "const": "ATP_CONTENT"
+    },
+    "author_unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "time_context": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "treatment_exposure_duration": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "exposure_duration_missing_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "science_hold_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "status": {
+      "const": "SOURCE_HOLD"
+    },
+    "gold_approved": {
+      "const": false
+    },
+    "source_role_at_R03": {
+      "enum": [
+        "PUBLISHED_DEV",
+        "POST_EVALUATION_DIAGNOSTIC_ONLY"
+      ]
+    },
+    "assay_record_id": {
+      "type": "string",
+      "pattern": "^r03:assay:"
+    },
+    "screen_cohort_id": {
+      "type": "string",
+      "pattern": "^r03:cohort:"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "time_context": {
+            "type": "object",
+            "properties": {
+              "time_context_kind": {
+                "const": "STORAGE_TIME"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "treatment_exposure_duration": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

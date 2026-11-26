@@ -1,0 +1,92 @@
+{
+  "schema": "asterloom.atp-content.external-structure-name-map/1",
+  "source_snapshot": "reports/phase1b_r53/R53_ATP_RELATION_CLOSURE_20261109/u1_stage23_dev14_unannotated_replay_20261109/PUBCHEM_EGCG_ALIAS_IDENTITY_SNAPSHOT.json",
+  "source_snapshot_sha256": "f8723c072766f88a0b7cd3385fa5569717aace8957a6d1841f15f7d8de67fa24",
+  "records": [
+    {
+      "external_id": "pubchem:65064",
+      "database": "PubChem",
+      "cid": 65064,
+      "aliases": [
+        "epigallocatechin gallate",
+        "epigallocatechin-3-gallate",
+        "EGCG"
+      ],
+      "molecular_formula": "C22H18O11",
+      "inchikey": "WMBWREPUVVBILR-WIYYLYMNSA-N",
+      "isomeric_smiles": "C1[C@H]([C@H](OC2=CC(=CC(=C21)O)O)C3=CC(=C(C(=C3)O)O)O)OC(=O)C4=CC(=C(C(=C4)O)O)O",
+      "iupac_name": "[(2R,3R)-5,7-dihydroxy-2-(3,4,5-trihydroxyphenyl)-3,4-dihydro-2H-chromen-3-yl] 3,4,5-trihydroxybenzoate",
+      "source_query_response_sha256": "ede588e752e057219a97962d9ce6259bd3b5f99f16fe1b30eb0e5087c1e8afc7",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/epigallocatechin gallate/property/IUPACName,InChIKey,MolecularFormula,IsomericSMILES/JSON",
+      "source_identity_approval": "STRUCTURE_NAME_CROSSWALK_ONLY",
+      "source_snapshot_sha256": "f8723c072766f88a0b7cd3385fa5569717aace8957a6d1841f15f7d8de67fa24"
+    },
+    {
+      "external_id": "pubchem:5281727",
+      "database": "PubChem",
+      "cid": 5281727,
+      "aliases": [
+        "pterostilbene"
+      ],
+      "molecular_formula": "C16H16O3",
+      "inchikey": "VLEUZFDZJKSGMX-ONEGZZNKSA-N",
+      "iupac_name": "4-[(E)-2-(3,5-dimethoxyphenyl)ethenyl]phenol",
+      "source_snapshot_sha256": "d4305060e127e90f63e075c2b992c576ee97c75320627663db096dc381b69999",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5281727/property/IUPACName,InChIKey,MolecularFormula,IsomericSMILES/JSON",
+      "required_author_specificity": "E_STEREOCHEMISTRY",
+      "source_identity_approval": "STRUCTURE_NAME_CROSSWALK_ONLY"
+    },
+    {
+      "external_id": "pubchem:1102",
+      "database": "PubChem",
+      "cid": 1102,
+      "aliases": [
+        "spermidine",
+        "SPD"
+      ],
+      "molecular_formula": "C7H19N3",
+      "inchikey": "ATHGHQPFGPMSJY-UHFFFAOYSA-N",
+      "isomeric_smiles": "C(CCNCCCN)CN",
+      "iupac_name": "N'-(3-aminopropyl)butane-1,4-diamine",
+      "source_snapshot_sha256": "360ff1c23bbf330bba2392804aef039db1a4db4ef52e09e0827e78fb0c555998",
+      "source_query_response_sha256": "7d185aca1c571af5c8881d726df3dd9ba01d33913af790b108858a3739b3a680",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/spermidine/property/IUPACName,InChIKey,MolecularFormula,IsomericSMILES/JSON",
+      "source_identity_approval": "STRUCTURE_NAME_CROSSWALK_ONLY"
+    },
+    {
+      "external_id": "pubchem:896",
+      "database": "PubChem",
+      "cid": 896,
+      "aliases": [
+        "melatonin",
+        "MT"
+      ],
+      "molecular_formula": "C13H16N2O2",
+      "inchikey": "DRLFMBDRBRZALE-UHFFFAOYSA-N",
+      "isomeric_smiles": "CC(=O)NCCC1=CNC2=C1C=C(C=C2)OC",
+      "iupac_name": "N-[2-(5-methoxy-1H-indol-3-yl)ethyl]acetamide",
+      "source_snapshot_sha256": "762319960239ec1c41c52b851c025053dc67065f7f2af87571d15380fd034d84",
+      "source_query_response_sha256": "71adefe55c7a656214ad6a158c652c7830aa5f5901cccb43d77ba3019f375189",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/melatonin/property/IUPACName,InChIKey,MolecularFormula,IsomericSMILES/JSON",
+      "source_identity_approval": "STRUCTURE_NAME_CROSSWALK_ONLY"
+    },
+    {
+      "external_id": "pubchem:641785",
+      "database": "PubChem",
+      "cid": 641785,
+      "aliases": [
+        "cardamonin"
+      ],
+      "molecular_formula": "C16H14O4",
+      "inchikey": "NYSZJNUIVUBQMM-BQYQJAHWSA-N",
+      "isomeric_smiles": "COC1=CC(=CC(=C1C(=O)/C=C/C2=CC=CC=C2)O)O",
+      "iupac_name": "(E)-1-(2,4-dihydroxy-6-methoxyphenyl)-3-phenylprop-2-en-1-one",
+      "source_snapshot_sha256": "bf35bfba1c72c00d317b8d376a407f539f6980930a2548c5b215f2059fc81c80",
+      "source_query_response_sha256": "98afc40a76758a9340048c4f93ac15ae610a95f9d39aa8238a84b2d8ad1229c0",
+      "source_url": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/cardamonin/property/IUPACName,InChIKey,MolecularFormula,IsomericSMILES/JSON",
+      "source_identity_approval": "STRUCTURE_NAME_CROSSWALK_ONLY"
+    }
+  ],
+  "runtime_network_access": false,
+  "automatic_gold_or_training_approval": false
+}
