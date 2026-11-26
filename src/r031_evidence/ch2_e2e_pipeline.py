@@ -244,7 +244,7 @@ def build_ch2_open_discovery_epmc_queries(
     round_5_only: bool = False,
     round_6_only: bool = False,
 ) -> list[str]:
-    """Build class-level Europe PMC OA queries beyond the closed 393-parent seed list.
+    """Build class-level Europe PMC OA queries that do not depend on a closed parent list.
 
     - `round_4_only=True`: Round 4 expanded bio-based monomer classes.
     - `round_5_only=True`: Round 5 high-yield natural monomer families + living/controlled `[M]/[I]` molar-ratio queries.

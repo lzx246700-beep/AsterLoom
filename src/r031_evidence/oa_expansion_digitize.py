@@ -1,10 +1,13 @@
-"""Calibrated figure-derived numeric records for AST-CH1-G1 increment 3.
+"""Calibrated figure-derived numeric records.
 
-Tick positions are frozen from the source images and calibrated by
-least squares. Live OpenCV auto y-axis detection is not used: it was
-unreliable on these HTML.jpg panels (PMC5954094 latched onto a bar
-edge). Author-reported numbers are only used in author_figure_check.
-FIGURE_ESTIMATED values are never written as AUTHOR_REPORTED.
+Tick positions are supplied by the caller and calibrated by least squares.
+Live OpenCV auto y-axis detection is not used. Author-reported numbers are
+only used in author_figure_check. FIGURE_ESTIMATED values are never written
+as AUTHOR_REPORTED.
+
+This module does not ship journal-figure calibrations. The default seed is
+the synthetic fixture at examples/mock_paper/seed_panels.json when that file
+is present. Set ASTERLOOM_SEED_PANELS to a JSON file of your own panels.
 """
 from __future__ import annotations
 
@@ -61,190 +64,29 @@ def _rel_or_abs(path: Path, base: Path) -> str:
     except ValueError:
         return str(path.resolve())
 
-LICENSE_CC_BY_40 = "https://creativecommons.org/licenses/by/4.0/"
 
-# Least-squares: value = intercept + slope * y_px
-SEED_PANELS = {
-    "PMC5954094": {
-        "paper_id": "PMC5954094",
-        "license": LICENSE_CC_BY_40,
-        "figure": "Figure 4",
-        "panel": None,
-        "panel_key": "F4",
-        "endpoint": "ATP_CONTENT",
-        "endpoint_label": "ATP content",
-        "y_kind": "ABSOLUTE",
-        "unit": "pmol / 10^5 sperm",
-        "axis_unit": "pmol / 10^5 sperm",
-        "error_kind": "s.e.m.",
-        "n_literal": None,
-        "assay": "ATP Bioluminescence Assay Kit HS II (Roche); luminometer",
-        "normalization": "ATP content in 10^5 sex-sorted sperm",
-        "molecule_parent": "resveratrol",
-        "cell_model": "sex-sorted bull sperm (005x, 011x, 056x)",
-        "time_literal": "1.5 h in fertilisation medium",
-        "exposure_h": 1.5,
-        "image_file": "expansion_assets/PMC5954094/41598_2018_25687_Fig4_HTML.jpg",
-        "image_sha256": "a663bd3143a44d306d23b1cb1218ac23aea64d644a377600b8746e806cfada40",
-        "jats_sha256": "9415d459110a7f33a0ffefa4664a336fa81e8f8b2675bd20e470d4e71a600640",
-        "jats_source": "continuation_20261116/acquired/PMC5954094/author.xml",
-        "pixel_tolerance_px": 2.0,
-        "bar_style": "hollow",
-        "low_resolution": True,
-        "image_size": [660, 308],
-        "ticks_px_value": [
-            [12, 14], [46, 12], [80, 10], [115, 8],
-            [149, 6], [184, 4], [218, 2], [253, 0],
-        ],
-        "method": (
-            "Frozen tick pixels + least-squares calibration; "
-            "hollow-bar y_px is the centre of the 1-px top stroke. "
-            "Live OpenCV auto y_axis() was not used (it latched onto a bar edge at x=136)."
-        ),
-        "author_quote": (
-            "As shown in Fig. 4, for sex-sorted sperm from bulls 005x, 011x, and 056x, "
-            "the ATP content in 105 sperm from the 10−3 M Res group (8.51 ± 0.73 pmol, "
-            "9.56 ± 0.74 pmol, and 7.15 ± 0.35 pmol) was similar to that in the 10−5 M "
-            "Res group (7.97 ± 0.56 pmol, 8.32 ± 0.74 pmol, and 7.40 ± 0.70 pmol), "
-            "significantly lower than the 10−4 M Res group (10.24 ± 0.58 pmol, "
-            "11.84 ± 0.87 pmol, and 9.07 ± 0.14 pmol), and significantly higher than "
-            "controls (5.10 ± 0.44 pmol, 6.85 ± 0.66 pmol, and 5.43 ± 0.64 pmol; P"
-        ),
-        "author_locator": "Results paragraph citing Fig. 4",
-        "marks": [
-            # y_px = top-stroke centre from a tight x window on the HTML.jpg
-            {"mark_id": "005x_Control", "bull": "005x", "dose_literal": "0 (control)", "dose_M": 0.0, "x_left": 74, "x_right": 90, "y_px": 166.5, "vision_value": None, "author_value": 5.10, "author_sem": 0.44, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "005x_1e-3", "bull": "005x", "dose_literal": "10^-3 M Res", "dose_M": 1e-3, "x_left": 100, "x_right": 116, "y_px": 106.5, "vision_value": None, "author_value": 8.51, "author_sem": 0.73, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "005x_1e-4", "bull": "005x", "dose_literal": "10^-4 M Res", "dose_M": 1e-4, "x_left": 136, "x_right": 151, "y_px": 76.5, "vision_value": None, "author_value": 10.24, "author_sem": 0.58, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "005x_1e-5", "bull": "005x", "dose_literal": "10^-5 M Res", "dose_M": 1e-5, "x_left": 158, "x_right": 176, "y_px": 116.5, "vision_value": None, "author_value": 7.97, "author_sem": 0.56, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "005x_1e-6", "bull": "005x", "dose_literal": "10^-6 M Res", "dose_M": 1e-6, "x_left": 192, "x_right": 210, "y_px": 161.5, "vision_value": None, "author_value": None, "author_sem": None, "author_unit": None},
-            {"mark_id": "011x_Control", "bull": "011x", "dose_literal": "0 (control)", "dose_M": 0.0, "x_left": 268, "x_right": 284, "y_px": 135.5, "vision_value": None, "author_value": 6.85, "author_sem": 0.66, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "011x_1e-3", "bull": "011x", "dose_literal": "10^-3 M Res", "dose_M": 1e-3, "x_left": 300, "x_right": 316, "y_px": 88.5, "vision_value": None, "author_value": 9.56, "author_sem": 0.74, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "011x_1e-4", "bull": "011x", "dose_literal": "10^-4 M Res", "dose_M": 1e-4, "x_left": 334, "x_right": 352, "y_px": 49.5, "vision_value": None, "author_value": 11.84, "author_sem": 0.87, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "011x_1e-5", "bull": "011x", "dose_literal": "10^-5 M Res", "dose_M": 1e-5, "x_left": 370, "x_right": 388, "y_px": 110.5, "vision_value": None, "author_value": 8.32, "author_sem": 0.74, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "011x_1e-6", "bull": "011x", "dose_literal": "10^-6 M Res", "dose_M": 1e-6, "x_left": 404, "x_right": 422, "y_px": 129.5, "vision_value": None, "author_value": None, "author_sem": None, "author_unit": None},
-            {"mark_id": "056x_Control", "bull": "056x", "dose_literal": "0 (control)", "dose_M": 0.0, "x_left": 480, "x_right": 496, "y_px": 160.5, "vision_value": None, "author_value": 5.43, "author_sem": 0.64, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "056x_1e-3", "bull": "056x", "dose_literal": "10^-3 M Res", "dose_M": 1e-3, "x_left": 512, "x_right": 530, "y_px": 130.5, "vision_value": None, "author_value": 7.15, "author_sem": 0.35, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "056x_1e-4", "bull": "056x", "dose_literal": "10^-4 M Res", "dose_M": 1e-4, "x_left": 548, "x_right": 566, "y_px": 97.5, "vision_value": None, "author_value": 9.07, "author_sem": 0.14, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "056x_1e-5", "bull": "056x", "dose_literal": "10^-5 M Res", "dose_M": 1e-5, "x_left": 582, "x_right": 600, "y_px": 126.5, "vision_value": None, "author_value": 7.40, "author_sem": 0.70, "author_unit": "pmol / 10^5 sperm"},
-            {"mark_id": "056x_1e-6", "bull": "056x", "dose_literal": "10^-6 M Res", "dose_M": 1e-6, "x_left": 616, "x_right": 634, "y_px": 148.5, "vision_value": None, "author_value": None, "author_sem": None, "author_unit": None},
-        ],
-    },
-    "PMC12024176": {
-        "paper_id": "PMC12024176",
-        "license": LICENSE_CC_BY_40,
-        "figure": "Figure 7",
-        "panel": None,
-        "panel_key": "F7",
-        "endpoint": "ATP_CONTENT",
-        "endpoint_label": "ATP",
-        "y_kind": "ABSOLUTE",
-        "unit": "nmol/mg protein",
-        "axis_unit": "nmol/mg protein",
-        "error_kind": None,
-        "n_literal": None,
-        "assay": "ATP detection kit (lysate supernatant vs standard curve)",
-        "normalization": "cellular ATP as plotted on the figure axis",
-        "molecule_parent": "Cyanidin-3-O-glucoside",
-        "cell_model": "SH-SY5Y",
-        "image_file": "expansion_assets/PMC12024176/antioxidants-14-00490-g007.jpg",
-        "image_sha256": "9087bccd164b6a062c5ad1a24486fc58997cb472b0dafa45b857dbbc23fdb108",
-        "jats_sha256": "465b02e0317db0df1a24b5632fa489f81361e652e41b9e628ae20f9adeeaa590",
-        "jats_source": "extra_acquired/PMC12024176/author.xml",
-        "pixel_tolerance_px": 2.0,
-        "bar_style": "solid",
-        "low_resolution": False,
-        "image_size": [787, 807],
-        "ticks_px_value": [
-            [16, 10], [117, 8], [218, 6], [319, 4], [420, 2], [521, 0],
-        ],
-        "method": (
-            "Frozen tick pixels + least-squares calibration; "
-            "solid-bar y_px is the first full-width dark row. "
-            "Figure y-axis unit is nmol/mg protein; body text reports μmol/L. "
-            "Units are not rewritten."
-        ),
-        "author_quote": (
-            "As shown in Figure 7, compared with the normal and solvent control groups "
-            "(9.030 and 8.823 μmol/L, respectively), the model group (2.391 μmol/L) "
-            "showed significantly lower ATP levels. Compared with the model group, the "
-            "drug protection groups showed a dose-dependent increase in ATP levels "
-            "(p < 0.05), with the ATP levels in the drug protection group being "
-            "6.481 μmol/L. The treatment group showed significantly higher intracellular "
-            "ATP levels than the model group and lower intracellular ATP levels "
-            "(4.525 μmol/L, p < 0.05) than the drug protection group."
-        ),
-        "author_locator": "Results 3.5 ATP",
-        "author_unit": "μmol/L",
-        "unit_conflict": True,
-        "marks": [
-            {"mark_id": "Normal", "role": "control", "dose_literal": None, "time_literal": None, "treatment": "normal control", "control": None, "x_left": 179, "x_right": 215, "y_px": 65.0, "vision_value": 9.04, "author_value": 9.030, "author_unit": "μmol/L"},
-            {"mark_id": "Solvent", "role": "solvent_control", "dose_literal": "0.3% DMSO", "time_literal": None, "treatment": "solvent control, 0.3% DMSO", "control": "Normal", "x_left": 268, "x_right": 304, "y_px": 76.0, "vision_value": 8.88, "author_value": 8.823, "author_unit": "μmol/L"},
-            {"mark_id": "Model", "role": "disease_model", "dose_literal": "1 µM Aβ1–42", "time_literal": "24 h", "exposure_h": 24.0, "treatment": "1 µM Aβ1–42, 24 h", "control": "Normal", "x_left": 358, "x_right": 394, "y_px": 400.0, "vision_value": 2.40, "author_value": 2.391, "author_unit": "μmol/L"},
-            {"mark_id": "Low_protection", "role": "protection", "dose_literal": "20 µg/mL C3G", "time_literal": "24 h pre-treatment then 24 h with Aβ1–42", "treatment": "20 µg/mL Cyanidin-3-O-glucoside 24 h pre-treatment, then 1 µM Aβ1–42 24 h (C3G left on)", "control": "Model", "x_left": 447, "x_right": 483, "y_px": 364.0, "vision_value": 3.16, "author_value": None, "author_unit": "μmol/L"},
-            {"mark_id": "Medium_protection", "role": "protection", "dose_literal": "40 µg/mL C3G", "time_literal": "24 h pre-treatment then 24 h with Aβ1–42", "treatment": "40 µg/mL Cyanidin-3-O-glucoside 24 h pre-treatment, then 1 µM Aβ1–42 24 h (C3G left on)", "control": "Model", "x_left": 537, "x_right": 572, "y_px": 272.0, "vision_value": 4.78, "author_value": None, "author_unit": "μmol/L"},
-            {"mark_id": "High_protection", "role": "protection", "dose_literal": "60 µg/mL C3G", "time_literal": "24 h pre-treatment then 24 h with Aβ1–42", "treatment": "60 µg/mL Cyanidin-3-O-glucoside 24 h pre-treatment, then 1 µM Aβ1–42 24 h (C3G left on)", "control": "Model", "x_left": 626, "x_right": 662, "y_px": 194.0, "vision_value": 6.48, "author_value": 6.481, "author_unit": "μmol/L", "author_note": "Body text quotes 6.481 μmol/L for 'the drug protection group' after a dose-dependent statement; the figure high-dose bar is the matching magnitude. This pairing is flagged, not assumed to be a named high-dose sentence."},
-            {"mark_id": "Treatment", "role": "co_treatment", "dose_literal": "40 µg/mL C3G", "time_literal": "24 h with Aβ1–42", "exposure_h": 24.0, "treatment": "40 µg/mL Cyanidin-3-O-glucoside + 1 µM Aβ1–42 together, 24 h", "control": "Model", "x_left": 715, "x_right": 751, "y_px": 293.0, "vision_value": 4.52, "author_value": 4.525, "author_unit": "μmol/L"},
-        ],
-    },
-    "PMC10135536": {
-        "paper_id": "PMC10135536",
-        "license": LICENSE_CC_BY_40,
-        "figure": "Figure 2",
-        "panel": "B",
-        "panel_key": "F2B",
-        "endpoint": "ATP_CONTENT",
-        "endpoint_label": "ATP content",
-        "y_kind": "ABSOLUTE",
-        "unit": "pmol/oocyte",
-        "axis_unit": "pmol/oocyte",
-        "error_kind": "s.e.m.",
-        "n_literal": "n=40; 10 oocytes lysed per measurement",
-        "assay": "ATP Bioluminescence Assay Kit HS II (Roche); luminometer, 10 s",
-        "normalization": "ATP per oocyte",
-        "molecule_parent": None,
-        "cell_model": "bovine oocytes (IVM)",
-        "time_literal": "pre-IVM / IVM supplementation as described in the paper",
-        "exposure_h": None,
-        "image_file": "expansion_assets/PMC10135536/antioxidants-12-00897-g002.jpg",
-        "image_sha256": "97148c6f31d54724cf522c014de727739eedc36f8b1a22286755625f1c959bbe",
-        "jats_sha256": "afb30f1e6219eea56cca899f41f4b79e5875ff5429a37cae229e62640fb6c69f",
-        "jats_source": "continuation_20261116/acquired/PMC10135536/author.xml",
-        "pixel_tolerance_px": 2.0,
-        "tick_placement_tolerance_px": 2.0,
-        "bar_style": "hollow",
-        "low_resolution": True,
-        "image_size": [732, 245],
-        "ticks_px_value": [
-            # visually placed on even 34-px centres ending at the 0.00 label row
-            [46, 2.50], [80, 2.00], [114, 1.50], [148, 1.00], [182, 0.50], [216, 0.00],
-        ],
-        "axis_line_y_px": 212,
-        "method": (
-            "Frozen visual tick centres at even 34-px spacing (2.50…0.00) + least squares; "
-            "hollow-bar y_px is the centre of the faint top stroke on panel B only. "
-            "Panels A (ROS) and C (GSH) are not digitized. The x-axis ink sits at y=212; "
-            "the 0.00 tick label centre is at y=216. Auto y-axis detection was not used."
-        ),
-        "author_quote": (
-            "The ATP and GSH levels in the oocytes of the CNP group "
-            "(1.43 ± 0.03 pmol, 9.67 ± 0.04 pmol), the CNP+MT group "
-            "(1.76 ± 0.02 pmol, 13.99 ± 0.27 pmol), and the CNP+MT+FLI group "
-            "(2.23 ± 0.06 pmol, 18.40 ± 0.17 pmol) were significantly higher "
-            "(p < 0.05) compared to the control group (1.05 ± 0.02 pmol, "
-            "8.09 ± 0.87 pmol), and the ATP and GSH levels of the CNP+MT+FLI "
-            "group were significantly higher (p < 0.05) compared to the other "
-            "groups (Figure 2B,C)."
-        ),
-        "author_locator": "Results 3.4 citing Figure 2B,C",
-        "marks": [
-            {"mark_id": "Control", "role": "control", "treatment": "IVM control", "control": None, "x_left": 320, "x_right": 326, "y_px": 142.5, "vision_value": 1.05, "author_value": 1.05, "author_sem": 0.02, "author_unit": "pmol/oocyte", "molecule": None},
-            {"mark_id": "CNP", "role": "treated", "treatment": "CNP", "control": "Control", "x_left": 354, "x_right": 360, "y_px": 118.5, "vision_value": 1.44, "author_value": 1.43, "author_sem": 0.03, "author_unit": "pmol/oocyte", "molecule": "CNP", "flags": ["PEPTIDE_NOT_CH1_PARENT"]},
-            {"mark_id": "CNP_MT", "role": "treated", "treatment": "CNP + melatonin", "control": "Control", "x_left": 414, "x_right": 420, "y_px": 93.5, "vision_value": 1.76, "author_value": 1.76, "author_sem": 0.02, "author_unit": "pmol/oocyte", "molecule": "CNP + melatonin", "flags": ["COMBINATION_TREATMENT", "PEPTIDE_NOT_CH1_PARENT"]},
-            {"mark_id": "CNP_MT_FLI", "role": "treated", "treatment": "CNP + melatonin + FLI (IGF1, FGF2, LIF)", "control": "Control", "x_left": 448, "x_right": 454, "y_px": 66.5, "vision_value": 2.24, "author_value": 2.23, "author_sem": 0.06, "author_unit": "pmol/oocyte", "molecule": "CNP + melatonin + FLI", "flags": ["COMBINATION_TREATMENT", "PEPTIDE_NOT_CH1_PARENT"]},
-        ],
-    },
-}
+def example_seed_path() -> Path:
+    """Synthetic seed shipped with the source tree, when the checkout layout is intact."""
+    return Path(__file__).resolve().parents[2] / "examples" / "mock_paper" / "seed_panels.json"
+
+
+def load_seed_panels(path: Path | None = None) -> dict:
+    """Load figure-calibration panels.
+
+    An explicit path wins. Otherwise ASTERLOOM_SEED_PANELS is used, then the
+    synthetic example. A missing file yields an empty panel map so the
+    algorithm can run without a research seed.
+    """
+    if path is None:
+        env = (os.environ.get("ASTERLOOM_SEED_PANELS") or "").strip()
+        path = Path(env).expanduser() if env else example_seed_path()
+    if not Path(path).is_file():
+        return {}
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    panels = data.get("panels") if isinstance(data, dict) and "panels" in data else data
+    if not isinstance(panels, dict):
+        raise ValueError("Seed panels must be a JSON object keyed by paper_id")
+    return panels
 
 
 def sha256_file(path: Path) -> str:
@@ -269,6 +111,8 @@ def least_squares_calibration(ticks_px_value):
     sum_yy = sum(y * y for y in ys)
     sum_yv = sum(y * v for y, v in zip(ys, vs))
     denom = n * sum_yy - sum_y * sum_y
+    if denom == 0:
+        raise ValueError("Tick pixels are degenerate; least-squares slope is undefined")
     slope = (n * sum_yv - sum_y * sum_v) / denom
     intercept = (sum_v - slope * sum_y) / n
     resid = [v - (intercept + slope * y) for y, v in zip(ys, vs)]
@@ -332,20 +176,63 @@ def _direction(treated, control):
     return "UNCHANGED"
 
 
-def build_records():
+def _control_link(mark: dict, values: dict) -> tuple[str | None, float | None, str | None]:
+    """Resolve a mark's control bar from explicit ids, known mark ids, or a group key."""
+    label = mark.get("control_label")
+    mark_id = mark.get("control_mark_id")
+    named = mark.get("control")
+    if not mark_id and isinstance(named, str) and named in values:
+        mark_id = named
+        if label is None:
+            label = named
+    if not mark_id:
+        group = mark.get("control_group")
+        if group:
+            guessed = f"{group}_Control"
+            if guessed in values and mark.get("mark_id") != guessed:
+                mark_id = guessed
+                if label is None:
+                    label = f"{group} control"
+    if label is None and isinstance(named, str) and named not in values:
+        label = named
+    if mark_id and mark_id in values:
+        return mark_id, values[mark_id], label
+    return None, None, label
+
+
+def _dose_uM(mark: dict, panel: dict):
+    if mark.get("dose_uM") is not None:
+        return mark.get("dose_uM")
+    dose_m = mark.get("dose_M")
+    if dose_m in (None, 0, 0.0) or not panel.get("convert_molar_to_uM"):
+        return None
+    return float(dose_m) * 1e6
+
+
+def _treatment(mark: dict, panel: dict, molecule):
+    if mark.get("treatment") is not None:
+        return mark.get("treatment")
+    if not panel.get("treatment_from_dose") or mark.get("dose_M") in (None, 0, 0.0):
+        return None
+    dose_literal = mark.get("dose_literal") or ""
+    time_literal = mark.get("time_literal", panel.get("time_literal")) or ""
+    name = molecule or ""
+    text = f"{dose_literal} {name}, {time_literal}".strip(" ,")
+    return text or None
+
+
+def build_records(panels: dict | None = None):
+    if panels is None:
+        panels = load_seed_panels()
     records = []
-    for paper_id, panel in SEED_PANELS.items():
+    for paper_id, panel in panels.items():
         cal = least_squares_calibration(panel["ticks_px_value"])
         unc = uncertainty(panel)
         values = {m["mark_id"]: round(calibrate_value(cal, m["y_px"]), 4) for m in panel["marks"]}
         unit_conflict = bool(panel.get("unit_conflict"))
         for mark in panel["marks"]:
             fig_val = values[mark["mark_id"]]
-            ctrl_id = mark.get("control")
-            ctrl_val = values.get(ctrl_id) if ctrl_id else None
-            if paper_id == "PMC5954094" and mark["dose_M"] != 0.0:
-                ctrl_id = f"{mark['bull']}_Control"
-                ctrl_val = values[ctrl_id]
+            _ctrl_id, ctrl_val, control_label = _control_link(mark, values)
             flags = list(mark.get("flags") or [])
             flags.append("MANUAL_TICK_CALIBRATION")
             if panel.get("low_resolution"):
@@ -357,11 +244,10 @@ def build_records():
             if mark.get("author_note"):
                 flags.append("AUTHOR_TEXT_PROTECTION_VALUE_PAIRED_TO_HIGH_DOSE_BAR")
             molecule = mark.get("molecule", panel.get("molecule_parent"))
-            entity_kind = "SMALL_MOLECULE" if paper_id == "PMC5954094" or (
-                paper_id == "PMC12024176" and mark["mark_id"] in {"Low_protection", "Medium_protection", "High_protection", "Treatment"}
-            ) else None
-            if paper_id == "PMC10135536":
-                entity_kind = None
+            if "entity_kind" in mark:
+                entity_kind = mark.get("entity_kind")
+            else:
+                entity_kind = panel.get("entity_kind")
             vision = mark.get("vision_value")
             check = author_figure_check(
                 mark.get("author_value"),
@@ -378,20 +264,32 @@ def build_records():
                     "value": mark["author_value"],
                     "unit": mark.get("author_unit") or panel.get("author_unit"),
                     "origin": "AUTHOR_TEXT",
-                    "quote": panel["author_quote"],
-                    "locator": panel["author_locator"],
+                    "quote": panel.get("author_quote"),
+                    "locator": panel.get("author_locator"),
                     "literal": f"{mark['author_value']} {mark.get('author_unit') or panel.get('author_unit')}",
                 }
                 if mark.get("author_sem") is not None:
                     author_reported["sem"] = mark["author_sem"]
                 if mark.get("author_note"):
                     author_reported["note"] = mark["author_note"]
+            cell_model = mark.get("cell_model") or panel.get("cell_model")
+            if mark.get("cell_model_detail"):
+                detail = mark["cell_model_detail"]
+                cell_model = f"{cell_model} ({detail})" if cell_model else str(detail)
             time_literal = mark.get("time_literal", panel.get("time_literal"))
             exposure_h = mark.get("exposure_h", panel.get("exposure_h"))
-            dose_uM = None
-            if paper_id == "PMC5954094" and mark.get("dose_M") not in (None, 0.0):
-                dose_uM = mark["dose_M"] * 1e6
+            image_size = panel.get("image_size") or [None, None]
             relation_key = f"{panel['panel_key']}:{mark['mark_id']}"
+            annotations = [dict(item) for item in (panel.get("annotations") or [])]
+            if unit_conflict:
+                annotations.append({
+                    "kind": "UNIT_CONFLICT_WITH_AUTHOR_TEXT",
+                    "note": (
+                        "Figure y-axis unit and the results text disagree. "
+                        "The figure unit is kept for FIGURE_ESTIMATED and the conflict is flagged. "
+                        "Units are not rewritten."
+                    ),
+                })
             record = {
                 "schema_version": "asterloom-figure-y/1",
                 "expansion_tag": "v1",
@@ -399,8 +297,8 @@ def build_records():
                 "record_sha256": None,
                 "paper_id": paper_id,
                 "relation_key": relation_key,
-                "endpoint": "ATP_CONTENT",
-                "endpoint_label": panel["endpoint_label"],
+                "endpoint": panel.get("endpoint") or "ATP_CONTENT",
+                "endpoint_label": panel.get("endpoint_label"),
                 "effect_kind": "ARM_VALUE",
                 "source_type": "FIGURE_ESTIMATED",
                 "value_source_type": "FIGURE_ESTIMATED",
@@ -412,25 +310,17 @@ def build_records():
                 "control_value": ctrl_val,
                 "molecule": molecule,
                 "entity_kind": entity_kind,
-                "cell_model": panel["cell_model"] if paper_id != "PMC5954094" else f"sex-sorted bull sperm ({mark['bull']})",
+                "cell_model": cell_model,
                 "dose_literal": mark.get("dose_literal"),
-                "dose_uM": dose_uM,
+                "dose_uM": _dose_uM(mark, panel),
                 "time_literal": time_literal,
                 "exposure_h": exposure_h,
-                "treatment": mark.get("treatment") or (
-                    f"{mark.get('dose_literal')} resveratrol, {panel['time_literal']}"
-                    if paper_id == "PMC5954094"
-                    else None
-                ),
-                "control": (
-                    f"{mark['bull']} control"
-                    if paper_id == "PMC5954094" and mark["dose_M"] != 0.0
-                    else mark.get("control")
-                ),
-                "assay": panel["assay"],
-                "normalization": panel["normalization"],
-                "license": panel["license"],
-                "jats_sha256": panel["jats_sha256"],
+                "treatment": _treatment(mark, panel, molecule),
+                "control": control_label,
+                "assay": panel.get("assay"),
+                "normalization": panel.get("normalization"),
+                "license": panel.get("license"),
+                "jats_sha256": panel.get("jats_sha256"),
                 "matched_contrast_id": None,
                 "related_contrast_ids": [],
                 "independent_gold": 0,
@@ -450,13 +340,13 @@ def build_records():
                     "error_bar_halfwidth": None,
                     "provenance": {
                         "paper_id": paper_id,
-                        "figure": panel["figure"],
-                        "panel": panel["panel"],
-                        "image_file": panel["image_file"],
-                        "image_sha256": panel["image_sha256"],
-                        "image_width": panel["image_size"][0],
-                        "image_height": panel["image_size"][1],
-                        "axis_unit": panel["axis_unit"],
+                        "figure": panel.get("figure"),
+                        "panel": panel.get("panel"),
+                        "image_file": panel.get("image_file"),
+                        "image_sha256": panel.get("image_sha256"),
+                        "image_width": image_size[0],
+                        "image_height": image_size[1],
+                        "axis_unit": panel.get("axis_unit"),
                         "axis_scale": "linear",
                         "calibration_intercept": cal["intercept"],
                         "calibration_slope": cal["slope"],
@@ -465,15 +355,15 @@ def build_records():
                         "calibration_ticks": cal["n_ticks"],
                         "ticks_px_value": panel["ticks_px_value"],
                         "value_per_px": cal["unit_per_px"],
-                        "pixel_tolerance_px": panel["pixel_tolerance_px"],
-                        "method": panel["method"],
+                        "pixel_tolerance_px": panel.get("pixel_tolerance_px"),
+                        "method": panel.get("method"),
                         "detector": "frozen_tick_least_squares",
-                        "bar_style": panel["bar_style"],
+                        "bar_style": panel.get("bar_style"),
                         "marks": {
                             "treated": {
                                 "mark_id": mark["mark_id"],
-                                "x_left": mark["x_left"],
-                                "x_right": mark["x_right"],
+                                "x_left": mark.get("x_left"),
+                                "x_right": mark.get("x_right"),
                                 "y_px": mark["y_px"],
                                 "value": fig_val,
                                 "vision_value": vision,
@@ -492,18 +382,8 @@ def build_records():
                         None if vision is None else round(abs(fig_val - float(vision)), 4)
                     ),
                 },
-                "annotations": [],
+                "annotations": annotations,
             }
-            if paper_id == "PMC10135536":
-                record["annotations"].append({
-                    "kind": "PANEL_SCOPE",
-                    "note": "Only Figure 2 panel B (ATP) is digitized. Panels A (ROS) and C (GSH) are excluded.",
-                })
-            if unit_conflict:
-                record["annotations"].append({
-                    "kind": "UNIT_CONFLICT_WITH_AUTHOR_TEXT",
-                    "note": "Figure y-axis is nmol/mg protein; the results text reports μmol/L. Magnitudes are close, but the figure unit is kept for FIGURE_ESTIMATED and the conflict is flagged. Units are not rewritten.",
-                })
             canonical = {k: record[k] for k in record if k not in ("record_id", "record_sha256")}
             payload = json.dumps(canonical, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
             digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
@@ -537,8 +417,6 @@ def build_status(assets_manifest, records):
         else:
             status = "IMAGE_READY"
             note = "Local still image restored; not yet digitized."
-        if pid == "PMC10471797":
-            note = (note + " " if note else "") + "Figure 4 ATP is panel H; do not digitize A,B as ATP."
         rows.append({
             "paper_id": pid,
             "status": status,
@@ -551,16 +429,20 @@ def build_status(assets_manifest, records):
 
 
 def status_markdown(rows, summary):
+    missing = summary.get("missing_paper_ids") or []
+    missing_text = ", ".join(missing) if missing else "none"
     lines = [
-        "# AST-CH1-G1 increment 3｜OA 图恢复与首批数字化状态",
+        "# Figure digitization status",
         "",
-        "分母是增量 2 入选的 30 篇，不是新筛的池。缺失图没有补下载，也没有把缺图论文补成空记录。",
+        "Status is computed from the caller-supplied asset manifest and the loaded seed panels.",
+        "Journal figure binaries are not included in this repository.",
         "",
-        f"- 本地已恢复静图：{summary['n_with_local_asset']}/30（{summary['n_assets']} 张）。",
-        f"- 本地缺图、未下载：{summary['n_missing_local_asset']}（{', '.join(summary['missing_paper_ids'])}）。",
-        f"- 本增量已数字化：{summary['n_digitized_papers']} 篇 / {summary['n_records']} 条 FIGURE_ESTIMATED ARM_VALUE（DeepSeek 种子：PMC5954094、PMC12024176、PMC10135536）。",
-        f"- 有图待数字化：{summary['n_image_ready']}。",
-        f"- 低分辨率（短边 < 400）：{summary['n_low_resolution_assets']} 张，仍可用于部分柱图，但自动找轴不可靠。",
+        f"- Papers in the manifest: {summary['n_selected']}.",
+        f"- Local still images: {summary['n_with_local_asset']} ({summary['n_assets']} files).",
+        f"- Missing local images: {summary['n_missing_local_asset']} ({missing_text}).",
+        f"- Digitized from the loaded panels: {summary['n_digitized_papers']} papers / {summary['n_records']} FIGURE_ESTIMATED ARM_VALUE records.",
+        f"- Images present but not in the loaded panels: {summary['n_image_ready']}.",
+        f"- Low resolution (short side < 400): {summary['n_low_resolution_assets']}.",
         "",
         "| paper_id | status | figures | assets | note |",
         "|---|---|---|---:|---|",
@@ -574,7 +456,9 @@ def status_markdown(rows, summary):
     return "\n".join(lines) + "\n"
 
 
-def build_outputs():
+def build_outputs(panels: dict | None = None):
+    if panels is None:
+        panels = load_seed_panels()
     assets_manifest = figure_dir() / "OA_FIGURE_EXPANSION_ASSETS_v1.json"
     assets_pins = figure_dir() / "OA_FIGURE_EXPANSION_ASSETS_PINS.json"
     if not assets_manifest.is_file():
@@ -591,7 +475,7 @@ def build_outputs():
     summary_path = out_dir / "expansion_summary_v1.json"
     status_path = out_dir / "EXPANSION_STATUS_v1.md"
     pins_path = out_dir / "EXPANSION_PINS_v1.json"
-    records = build_records()
+    records = build_records(panels)
     rows = build_status(assets, records)
     n_ready = sum(1 for r in rows if r["status"] == "IMAGE_READY")
     n_missing = sum(1 for r in rows if r["status"] == "IMAGE_MISSING")
@@ -603,13 +487,14 @@ def build_outputs():
         if not chk:
             continue
         checks.append(rec["relation_key"])
-        if rec["paper_id"] == "PMC12024176":
+        if chk.get("reason") == "UNIT_CONFLICT_WITH_AUTHOR_TEXT":
             continue
         agrees.append(chk["agree"])
+    n_selected = len(assets.get("papers") or [])
     summary = {
         "schema": "asterloom-figure-y-expansion-summary/1",
         "tag": "v1",
-        "n_selected": 30,
+        "n_selected": n_selected,
         "n_with_local_asset": assets["n_with_local_asset"],
         "n_missing_local_asset": assets["n_missing_local_asset"],
         "n_assets": sum(len(p["assets"]) for p in assets["papers"]),
@@ -625,17 +510,18 @@ def build_outputs():
         "training_approved": 0,
         "author_figure_check_same_unit_agree": int(sum(1 for a in agrees if a)),
         "author_figure_check_same_unit_total": len(agrees),
-        "unit_conflict_paper_ids": ["PMC12024176"],
+        "unit_conflict_paper_ids": sorted({
+            r["paper_id"] for r in records if "UNIT_CONFLICT_WITH_AUTHOR_TEXT" in r["flags"]
+        }),
         "notes": [
             "Live OpenCV auto y-axis was not used.",
-            "PMC12024176 figure unit nmol/mg protein vs author text μmol/L is flagged, not rewritten.",
-            "PMC10135536 only panel B is digitized.",
-            "PMC5954094 10^-6 M arms have no author number and are figure-only.",
+            "Author numbers are a same-unit cross-check only. Unit conflicts are flagged and not rewritten.",
+            "Seed panels are loaded from the caller-supplied file. This repository ships a synthetic example only.",
         ],
     }
     spec = {
         "schema": "asterloom-figure-y-expansion-spec/1",
-        "task": "AST-CH1-G1 increment 3",
+        "task": "figure-y expansion",
         "version": "v1",
         "assets_manifest": str(assets_manifest),
         "method_note": (
@@ -643,7 +529,7 @@ def build_outputs():
             "Not a live OpenCV replay of figure_y_detect.y_axis(). "
             "Author numbers are cross-check only."
         ),
-        "papers": list(SEED_PANELS.values()),
+        "papers": list(panels.values()),
     }
     out_dir.mkdir(parents=True, exist_ok=True)
     spec_text = json.dumps(spec, indent=2, ensure_ascii=False) + "\n"
@@ -671,7 +557,7 @@ def build_outputs():
         "assets_pins": str(assets_pins),
         "assets_pins_sha256": sha256_file(assets_pins) if assets_pins.is_file() else None,
         "counts": {
-            "n_selected": 30,
+            "n_selected": n_selected,
             "n_with_local_asset": assets["n_with_local_asset"],
             "n_missing_local_asset": assets["n_missing_local_asset"],
             "n_digitized_papers": n_digitized,
@@ -687,7 +573,7 @@ def build_outputs():
 
 def main() -> int:
     pins = build_outputs()
-    print(json.dumps(pins, indent=2, ensure_ascii=False))
+    print(json.dumps({k: pins[k] for k in pins if k != "papers"}, indent=2, ensure_ascii=False))
     return 0
 
 

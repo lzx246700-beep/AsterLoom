@@ -568,78 +568,27 @@ class TestCh2PluggablePipeline(unittest.TestCase):
         from r031_evidence.ch1_parent_registry import load_registry, resolve_parent
 
         ch1_recs = load_registry()
-        ch2_recs = ch2_builder.load_ch2_monomer_registry()
-        self.assertFalse(resolve_parent("tannic acid", records=ch1_recs)["is_natural_or_endogenous"])
-        self.assertFalse(resolve_parent("benzyl lipoate", records=ch1_recs)["is_natural_or_endogenous"])
-        for name, exp_parent in [
-            ("tannic acid", "Tannic acid"),
-            ("L-valine", "L-Valine"),
-            ("L-isoleucine", "L-Isoleucine"),
-            ("benzyl lipoate", "Lipoic acid"),
-            ("ethyl lipoate", "Lipoic acid"),
-            ("sebacic acid", "Sebacic acid"),
-            ("fumaric acid", "Fumarate"),
-            ("genipin", "(+)-Genipin"),
-            ("D-limonene", "Limonene"),
-            ("linalool", "Linalool"),
-            ("L-ornithine", "L-Ornithine"),
-            ("4-vinylguaiacol", "4-Vinylguaiacol"),
-            ("vanillin", "Vanillin"),
-            ("isosorbide", "Isosorbide"),
-            ("β-myrcene", "Myrcene"),
-            ("2,5-furandicarboxylic acid", "2,5-Furandicarboxylic acid"),
-            ("geraniol", "Geraniol"),
-            ("β-ocimene", "beta-Ocimene"),
-            ("β-pinene", "beta-Pinene"),
-            ("farnesol", "Farnesol"),
-            ("syringaldehyde", "Syringaldehyde"),
-            ("4-hydroxybenzoic acid", "4-Hydroxybenzoic acid"),
-            ("L-alanine", "L-Alanine"),
-            ("3,4-dihydroxyphenylalanine", "L-DOPA"),
-            ("camptothecin", "Camptothecin"),
-            ("hydrocaffeic acid", "Dihydrocaffeic acid"),
-            ("β-Phellandrene", "beta-Phellandrene"),
-            ("abietic acid", "Abietic acid"),
-            ("limonene oxide", "Limonene oxide"),
-            ("4-propylguaiacol", "4-Propylguaiacol"),
-            ("L-histidine", "L-Histidine"),
-            ("chavicol", "Chavicol"),
-            ("perillyl alcohol", "Perillyl alcohol"),
-            ("sarcosine", "Sarcosine"),
-            ("trans-β-farnesene", "beta-Farnesene"),
-            ("α-Pinene", "alpha-Pinene"),
-            ("α-Terpineol", "alpha-Terpineol"),
-            ("borneol", "Borneol"),
-            ("hydroquinone", "Hydroquinone"),
-            ("vanillyl alcohol", "Vanillyl alcohol"),
-            ("raspberry ketone", "Raspberry ketone"),
-            ("tyrosol", "Tyrosol"),
-            ("pyridoxine", "Pyridoxine"),
-            ("3,4-dihydroxybenzyl alcohol", "3,4-Dihydroxybenzyl alcohol"),
-            ("cardanol", "Cardanol"),
-            ("furfuryl alcohol", "Furfuryl alcohol"),
-            ("p-coumaric acid", "p-Coumaric acid"),
-            ("erythritol", "Erythritol"),
-            ("sorbitol", "D-Sorbitol"),
-            ("xylitol", "Xylitol"),
-            ("cinnamic acid", "Cinnamic acid"),
-            ("phloroglucinol", "Phloroglucinol"),
-            ("furfurylamine", "Furfurylamine"),
-            ("ω-Pentadecalactone", "omega-Pentadecalactone"),
-            ("sinapic acid", "Sinapic acid"),
-            ("δ-Dodecalactone", "delta-Dodecalactone"),
-            ("δ-Valerolactone", "delta-Valerolactone"),
-            ("ricinoleic acid", "Ricinoleic acid"),
-            ("ethylene brassylate", "Ethylene brassylate"),
-            ("10-undecylenic acid", "10-Undecylenic acid"),
-        ]:
-            info = resolve_parent(name, records=ch2_recs)
-            self.assertEqual(info["canonical_parent"], exp_parent)
-            self.assertTrue(info["is_natural_or_endogenous"])
-            self.assertTrue(bool(info["smiles"]))
-        hmf = resolve_parent("5-hydroxymethylfurfural", records=ch2_recs)
-        self.assertTrue(hmf["is_natural_or_endogenous"])
-        self.assertTrue(bool(hmf["smiles"]))
+        self.assertFalse(resolve_parent("Mocklactide", records=ch1_recs)["is_natural_or_endogenous"])
+        with tempfile.TemporaryDirectory() as td:
+            patch = Path(td) / "synthetic_monomer_patch.json"
+            patch.write_text(json.dumps({
+                "schema": "asterloom.ch2-monomer-registry-patch/1",
+                "records": [{
+                    "preferred_name": "Mocklactide",
+                    "aliases": ["Mocklactide"],
+                    "smiles": "CC",
+                    "inchikey": "MOCKPATCH000000-UHFFFAOYSA-N",
+                    "scaffold_group": "MOCKPATCH000000",
+                    "natural_product_status": "confirmed",
+                    "provenance_sources": ["synthetic_test_patch"],
+                }],
+            }), encoding="utf-8")
+            ch2_recs = ch2_builder.load_ch2_monomer_registry(patch)
+        info = resolve_parent("Mocklactide", records=ch2_recs)
+        self.assertEqual(info["canonical_parent"], "Mocklactide")
+        self.assertTrue(info["is_natural_or_endogenous"])
+        self.assertTrue(bool(info["smiles"]))
+        self.assertFalse(resolve_parent("Mocklactide", records=ch1_recs)["is_natural_or_endogenous"])
 
     def test_ch2_open_discovery_queries_and_triage_route(self):
         q_open = ch2_e2e.build_ch2_epmc_queries(query_mode="open_discovery")
@@ -769,7 +718,17 @@ class TestCh2PluggablePipeline(unittest.TestCase):
                 },
             ],
         }
-        verified = ds.verify_and_normalize_deepseek_events(raw_ans, fake_ctx)
+        verified = ds.verify_and_normalize_deepseek_events(raw_ans, fake_ctx, records=[
+            {
+                "preferred_name": name,
+                "aliases": [name],
+                "smiles": "CC",
+                "inchikey": f"MOCKV16{i:04d}-UHFFFAOYSA-N",
+                "scaffold_group": f"MOCKV16{i:04d}",
+                "natural_product_status": "confirmed",
+            }
+            for i, name in enumerate(("omega-Pentadecalactone", "10-Undecylenic acid", "Geraniol"))
+        ])
         by_mol = {e["monomer_identity"]["canonical_parent"]: e for e in verified}
 
         pdl = by_mol["omega-Pentadecalactone"]

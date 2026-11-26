@@ -9,6 +9,18 @@ from r031_evidence.atp_content_figure import extract_figure
 
 
 class Figure(unittest.TestCase):
+    def setUp(self):
+        # License tests mock the OCR process. They still call shutil.which first,
+        # which is absent on non-macOS offline runners.
+        self._swift = patch(
+            "r031_evidence.atp_content_figure.shutil.which",
+            return_value="swift",
+        )
+        self._swift.start()
+
+    def tearDown(self):
+        self._swift.stop()
+
     def test_dose_row_has_coordinate_evidence_and_no_atp_values(self):
         tokens = [{'text':'TYP (uM)','bbox':[.39,.05,.05,.016],'ocr_confidence':.8},
                   {'text':'40','bbox':[.55,.05,.01,.016],'ocr_confidence':.7},

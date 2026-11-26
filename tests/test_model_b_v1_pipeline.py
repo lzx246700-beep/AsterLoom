@@ -31,37 +31,34 @@ _HAS_RDKIT_AND_SKLEARN = (
 class TestCh2RegistryConditionAndGoldPacket(unittest.TestCase):
     def test_ch2_monomer_patch_expansion_and_ch1_isolation(self):
         ch1_records = ch1_reg.load_registry()
-        ch2_records = ch2_builder.load_ch2_monomer_registry()
-        self.assertEqual(len(ch1_records), 393)
-        self.assertGreaterEqual(len(ch2_records), 437)
-
-        # Ensure zero duplicate InChIKeys in Ch2 registry
+        self.assertGreater(len(ch1_records), 0)
+        self.assertLess(len(ch1_records), 30)
+        self.assertTrue(all(
+            "oxphos" not in " ".join(r.get("provenance_sources") or [])
+            for r in ch1_records
+        ))
+        with tempfile.TemporaryDirectory() as td:
+            patch = Path(td) / "synthetic_monomer_patch.json"
+            patch.write_text(json.dumps({
+                "schema": "asterloom.ch2-monomer-registry-patch/1",
+                "records": [{
+                    "preferred_name": "Mocklactide",
+                    "aliases": ["Mocklactide", "mock lactide"],
+                    "smiles": "CC",
+                    "inchikey": "MOCKPATCH000000-UHFFFAOYSA-N",
+                    "scaffold_group": "MOCKPATCH000000",
+                    "natural_product_status": "confirmed",
+                    "provenance_sources": ["synthetic_test_patch"],
+                }],
+            }), encoding="utf-8")
+            ch2_records = ch2_builder.load_ch2_monomer_registry(patch)
+        self.assertEqual(len(ch2_records), len(ch1_records) + 1)
         iks = [r["inchikey"] for r in ch2_records if r.get("inchikey")]
         self.assertEqual(len(iks), len(set(iks)))
-
-        # Verify newly added monomers & aliases resolve in Ch2 without polluting Ch1
-        expected_pairs = [
-            ("2,5-bis(hydroxymethyl)furan", "2,5-Bis(hydroxymethyl)furan"),
-            ("BHMF", "2,5-Bis(hydroxymethyl)furan"),
-            ("2-Pyrone-4,6-dicarboxylic acid", "2-Pyrone-4,6-dicarboxylic acid"),
-            ("PDC", "2-Pyrone-4,6-dicarboxylic acid"),
-            ("4-Hydroxybenzaldehyde", "4-Hydroxybenzaldehyde"),
-            ("Deoxycholic acid", "Deoxycholic acid"),
-            ("Camphoric acid", "Camphoric acid"),
-            ("Glutamic acid", "L-glutamic acid"),
-            ("Andrographolide", "Andrographolide"),
-            ("4-Methylumbelliferone", "4-Methylumbelliferone"),
-            ("L-Lactide", "L-Lactide"),
-            ("Lactide", "L-Lactide"),
-        ]
-        for query_name, expected_parent in expected_pairs:
-            info = ch1_reg.resolve_parent(query_name, records=ch2_records)
-            self.assertTrue(info["is_natural_or_endogenous"], f"Expected {query_name} to resolve in Ch2")
-            self.assertEqual(info["canonical_parent"], expected_parent)
-
-        # Confirm Ch1 base registry was NOT polluted with Ch2-only monomers
-        self.assertFalse(ch1_reg.resolve_parent("BHMF", records=ch1_records)["is_natural_or_endogenous"])
-        self.assertFalse(ch1_reg.resolve_parent("L-Lactide", records=ch1_records)["is_natural_or_endogenous"])
+        info = ch1_reg.resolve_parent("mock lactide", records=ch2_records)
+        self.assertTrue(info["is_natural_or_endogenous"])
+        self.assertEqual(info["canonical_parent"], "Mocklactide")
+        self.assertFalse(ch1_reg.resolve_parent("Mocklactide", records=ch1_records)["is_natural_or_endogenous"])
 
     def test_open_discovery_round4_queries(self):
         q_r4 = ch2_e2e.build_ch2_epmc_queries(query_mode="open_discovery_r4")
@@ -150,7 +147,17 @@ class TestCh2RegistryConditionAndGoldPacket(unittest.TestCase):
                 },
             ],
         }
-        evs = ch2_ds.verify_and_normalize_deepseek_events(raw, ctx)
+        evs = ch2_ds.verify_and_normalize_deepseek_events(raw, ctx, records=[
+            {
+                "preferred_name": name,
+                "aliases": [name],
+                "smiles": "CC",
+                "inchikey": f"MOCKSTOICH{i:04d}-UHFFFAOYSA-N",
+                "scaffold_group": f"MOCKSTOICH{i:04d}",
+                "natural_product_status": "confirmed",
+            }
+            for i, name in enumerate(("L-Lactide", "L-Leucine"))
+        ])
         self.assertEqual(len(evs), 2)
         lactide_ev = next(e for e in evs if e["monomer_identity"]["canonical_parent"] == "L-Lactide")
         self.assertEqual(lactide_ev["reaction_conditions"]["feed_ratio_m_to_i"], 100.0)

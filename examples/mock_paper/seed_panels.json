@@ -1,0 +1,133 @@
+{
+  "schema": "asterloom-figure-y-seed-panels/1",
+  "note": "Synthetic calibration fixture. Not a published paper and not measured from a journal figure.",
+  "panels": {
+    "PMC00000000": {
+      "paper_id": "PMC00000000",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "figure": "Figure 1",
+      "panel": "A",
+      "panel_key": "F1A",
+      "endpoint": "ATP_CONTENT",
+      "endpoint_label": "ATP content",
+      "unit": "arbitrary units",
+      "axis_unit": "arbitrary units",
+      "assay": "synthetic luminometer fixture",
+      "normalization": "per mock well",
+      "molecule_parent": "mockolin",
+      "entity_kind": "SMALL_MOLECULE",
+      "cell_model": "mock epithelial cells",
+      "time_literal": "24 h",
+      "exposure_h": 24.0,
+      "image_file": "examples/mock_paper/not_a_journal_figure.txt",
+      "image_sha256": null,
+      "jats_sha256": null,
+      "jats_source": "examples/mock_paper/author.xml",
+      "pixel_tolerance_px": 2.0,
+      "bar_style": "solid",
+      "low_resolution": false,
+      "image_size": [120, 140],
+      "ticks_px_value": [[0, 10], [100, 0]],
+      "method": "Synthetic tick pixels and least-squares calibration. No journal figure was used.",
+      "author_quote": "In the synthetic fixture, the treated arm reads 8 arbitrary units and the control arm reads 2 arbitrary units.",
+      "author_locator": "examples/mock_paper",
+      "convert_molar_to_uM": true,
+      "treatment_from_dose": true,
+      "marks": [
+        {
+          "mark_id": "Control",
+          "role": "control",
+          "dose_literal": "0 (control)",
+          "dose_M": 0.0,
+          "x_left": 10,
+          "x_right": 30,
+          "y_px": 80,
+          "vision_value": 2.0,
+          "author_value": 2.0,
+          "author_sem": 0.1,
+          "author_unit": "arbitrary units"
+        },
+        {
+          "mark_id": "Treated",
+          "role": "treated",
+          "dose_literal": "10^-5 M",
+          "dose_M": 1e-5,
+          "control_mark_id": "Control",
+          "control_label": "mock control",
+          "x_left": 40,
+          "x_right": 60,
+          "y_px": 20,
+          "vision_value": 8.0,
+          "author_value": 8.0,
+          "author_sem": 0.2,
+          "author_unit": "arbitrary units"
+        },
+        {
+          "mark_id": "Unlabeled",
+          "role": "treated",
+          "dose_literal": "10^-6 M",
+          "dose_M": 1e-6,
+          "control_mark_id": "Control",
+          "x_left": 70,
+          "x_right": 90,
+          "y_px": 50,
+          "vision_value": null,
+          "author_value": null,
+          "author_unit": null
+        }
+      ]
+    },
+    "PMC00000001": {
+      "paper_id": "PMC00000001",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "figure": "Figure 2",
+      "panel": "B",
+      "panel_key": "F2B",
+      "endpoint": "ATP_CONTENT",
+      "endpoint_label": "ATP",
+      "unit": "nmol/mg protein",
+      "axis_unit": "nmol/mg protein",
+      "author_unit": "µmol/L",
+      "unit_conflict": true,
+      "assay": "synthetic kit versus a mismatched text unit",
+      "normalization": "as plotted",
+      "molecule_parent": "mockolin",
+      "entity_kind": null,
+      "cell_model": "mock epithelial cells",
+      "time_literal": "24 h",
+      "exposure_h": 24.0,
+      "image_file": "examples/mock_paper/not_a_journal_figure.txt",
+      "image_sha256": null,
+      "jats_sha256": null,
+      "jats_source": "examples/mock_paper/author.xml",
+      "pixel_tolerance_px": 2.0,
+      "bar_style": "hollow",
+      "low_resolution": true,
+      "image_size": [100, 100],
+      "ticks_px_value": [[0, 10], [100, 0]],
+      "method": "Synthetic unit-conflict fixture. The figure unit is kept and the conflict is flagged.",
+      "author_quote": "The synthetic text reports 6 µmol/L while the figure axis is nmol/mg protein.",
+      "author_locator": "examples/mock_paper",
+      "annotations": [
+        {
+          "kind": "PANEL_SCOPE",
+          "note": "Synthetic panel only. No journal panel was digitized."
+        }
+      ],
+      "marks": [
+        {
+          "mark_id": "Mismatch",
+          "role": "treated",
+          "dose_literal": "40 µg/mL mockolin",
+          "treatment": "mockolin, mismatched units",
+          "x_left": 20,
+          "x_right": 40,
+          "y_px": 40,
+          "vision_value": 6.0,
+          "author_value": 6.0,
+          "author_unit": "µmol/L"
+        }
+      ]
+    }
+  }
+}

@@ -118,7 +118,10 @@ _CH2_REGISTRY_PATCH = Path(__file__).parent / "data" / "ch2_monomer_registry_pat
 
 
 def load_ch2_monomer_registry(patch_path: Path = _CH2_REGISTRY_PATCH) -> list[dict[str, Any]]:
-    """Load base natural parent registry overlaid with Chapter 2 plugin-scoped monomer patch (zero impact on Ch1)."""
+    """Load the example parent registry, then overlay an optional caller-supplied monomer patch.
+
+    The research patch is not packaged. A missing patch file leaves the base records unchanged.
+    """
     base_records = [dict(r, aliases=list(r.get("aliases") or [])) for r in load_registry()]
     if not patch_path.is_file():
         return base_records

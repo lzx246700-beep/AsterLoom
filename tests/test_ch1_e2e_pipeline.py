@@ -60,8 +60,16 @@ class TestCh1E2EPipeline(unittest.TestCase):
             build_targeted_epmc_queries(recs, batch_size=0)
 
     def test_registry_queries_are_batched_and_titled(self):
-        queries = build_targeted_epmc_queries(batch_size=10, max_molecules=40)
-        self.assertEqual(len(queries), 4)
+        recs = [
+            {
+                "preferred_name": f"Mockomer {i:02d}",
+                "natural_product_status": "confirmed",
+                "provenance_sources": ["public_example_fixture"],
+            }
+            for i in range(25)
+        ]
+        queries = build_targeted_epmc_queries(recs, batch_size=10, max_molecules=40)
+        self.assertEqual(len(queries), 3)
         for q in queries:
             self.assertTrue(q.startswith("TITLE_ABS:("))
             self.assertIn(" NOT (TITLE:plant", q)
