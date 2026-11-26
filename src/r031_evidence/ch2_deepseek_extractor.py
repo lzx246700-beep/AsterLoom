@@ -3,7 +3,7 @@
 Reuses the cost-guarded `r44_deepseek_vision.call_deepseek_vision` gateway (text-only mode,
 thinking disabled, cache-stable fixed system prompt, CC-BY/CC0 license gate, SHA256 journals).
 Every extracted candidate passes through deterministic back-gate verification against the
-393-entry natural parent registry and hard-holds physical encapsulation / biological triggers.
+loaded natural-parent registry and hard-holds physical encapsulation / biological triggers.
 """
 from __future__ import annotations
 

@@ -7,7 +7,7 @@ Thank you for considering a contribution. This repository is a **source-first**,
 ## Ground rules / 基本原则
 
 1. **Do not commit secrets** — API keys, tokens, `.env` files, credentials, or machine-specific absolute paths.
-2. **Do not commit private or copyrighted corpora** — raw journal figures, paywalled PDFs, unpublished thesis datasets, `.jsonl` training dumps, `.joblib` weights, or `.sqlite` ledgers.
+2. **Do not commit private or copyrighted corpora** — raw journal figures, figure-calibration seeds taken from published panels, paywalled PDFs, unpublished candidate lists, PubChem supplement snapshots, `.jsonl` training dumps, `.joblib` weights, or `.sqlite` ledgers. Offline tests should use the synthetic fixtures under `examples/mock_paper/` or a small public-domain example.
 3. **Prefer fixtures** — add a small synthetic XML/JSON fixture under `examples/` or `tests/fixtures/` instead of pointing tests at a local disk path.
 4. **Keep the default offline** — paid or networked model calls must be explicit, documented, and ledger-backed. Tests must pass without network access and without host-specific directories.
 5. **Configure data with environment variables**, not hardcoded paths:

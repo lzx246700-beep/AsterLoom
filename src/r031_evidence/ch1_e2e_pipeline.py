@@ -138,8 +138,8 @@ def build_targeted_epmc_queries(
     return queries
 
 
-# Open-ended ATP-First natural-product chemical class queries (breaks the 393-parent closed dictionary ceiling
-# to scale toward >= 500 distinct natural small-molecule parents for Model A virtual screening).
+# Open-ended ATP-content natural-product chemical class queries.
+# These class strings are search hints, not a packaged candidate corpus.
 _OPEN_DISCOVERY_CLASS_CLAUSES = (
     '("flavonoid" OR "flavone" OR "flavonol" OR "isoflavone" OR "anthocyanin" OR "polyphenol" OR "catechin" OR "chalcone")',
     '("alkaloid" OR "isoquinoline" OR "indole alkaloid" OR "protoberberine" OR "purine alkaloid")',

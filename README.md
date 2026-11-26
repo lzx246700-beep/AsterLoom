@@ -69,7 +69,7 @@ Specialized scripts live under `scripts/`, for example:
 
 - `scripts/asterloom_cli.py` — unified platform entry (profiles, demand compilation)
 - `scripts/screen_oa_figures.py` — offline JATS figure screening
-- `scripts/digitize_oa_expansion.py` — calibrated figure-record builder (requires local assets)
+- `scripts/digitize_oa_expansion.py` — calibrated figure-record builder. The packaged seed is the synthetic fixture `examples/mock_paper/seed_panels.json`. Set `ASTERLOOM_SEED_PANELS` to your own panel JSON and `ASTERLOOM_FIGURE_DIR` to a local asset manifest. Journal figures are not included.
 
 ## Minimal offline example / 最小离线示例
 
@@ -124,12 +124,14 @@ python -m unittest discover -s tests -p 'test_*.py'
 
 ## Data that is not in this repository / 本仓库不包含的数据
 
-- Journal figure images extracted from publications
-- Unpublished datasets or model weights (`.jsonl`, `.joblib`)
-- Local SQLite ledgers or production workspaces
-- Private operator notes and internal handoff documents
+- Journal figure images extracted from publications, and real figure-calibration seeds (pixel ticks, author quotes, journal filenames)
+- Unpublished or project-specific compound screens, PubChem supplement snapshots, and monomer research patches
+- Model weights (`.jsonl`, `.joblib`), local SQLite ledgers, and production workspaces
+- Private operator notes, internal handoff documents, and preview-release packaging scripts
 
-期刊原文图片、未发表数据集或模型权重、本地账本与生产工作区、以及内部交接文档均不在本仓库中。
+`src/r031_evidence/data/ch1_natural_parent_registry_v1.json` is a small public-domain example (common natural products) used by offline tests. It is not a screened candidate list. `src/r031_evidence/data/atp_content_external_structure_aliases.json` is a five-compound public PubChem name crosswalk for the offline identity checks. SQL files under `data/` are schema, not datasets.
+
+期刊原文图片、真实图表标定种子、未发表或项目专用化合物清单、PubChem 补充快照、单体研究补丁、模型权重、本地账本、生产工作区、内部交接文档和预览打包脚本均不在本仓库中。`ch1_natural_parent_registry_v1.json` 只是离线测试用的小型公有领域示例，不是筛选后的候选库。
 
 ## License / 许可
 

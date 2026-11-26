@@ -1,4 +1,9 @@
-"""Offline pinned natural/endogenous small-molecule parent registry for Chapter 1."""
+"""Offline natural-parent name resolver for Chapter 1.
+
+The packaged JSON is a small public-domain example for offline tests.
+`build_registry_from_local_sources` reads caller-supplied files and does not
+ship those sources.
+"""
 from __future__ import annotations
 
 import csv
